@@ -1,5 +1,5 @@
 /* Italingo — service worker (hors-ligne). Généré le 2026-09-16 par outil/construire-sw.py — ne pas éditer à la main. */
-const CACHE = 'italingo-73ce013686';
+const CACHE = 'italingo-9a16826299';
 const FICHIERS = [
 "./",
 "./assets/decors/arche-basse.svg",

@@ -354,3 +354,34 @@ img.deco,img.lapin{display:block;width:100%;height:auto}
 input[type=time]{font:inherit;color:var(--cacao);border:1.5px solid var(--filet-2);border-radius:var(--r-m);padding:10px 14px;background:#fff}
 input[type=file]{display:none}
 select.plain{font:inherit;color:var(--cacao);border:1.5px solid var(--filet-2);border-radius:var(--r-m);padding:10px 14px;background:#fff;width:100%}
+
+/* =====================================================================
+   AJUSTEMENTS v0.1.1 — retours d'Isa sur Android (16 sept. 2026)
+   Lisibilité : corps de texte et textes secondaires légèrement agrandis.
+   Les boutons et les choix à sélectionner restent tels quels.
+   ===================================================================== */
+body{font-size:16px}
+.hd .date{font-size:13.5px}
+.hd .greet{font-size:32px}
+.hd .greet.sm{font-size:28px}
+.sect .t{font-size:22px}
+.sect .more{font-size:13px}
+.row .txt b{font-size:16px}
+.row .txt span{font-size:13.5px}
+.node .txt b{font-size:16px}
+.node .txt span{font-size:13.5px}
+.serie span{font-size:13.5px}
+.card .t{font-size:11.5px}
+.small,.muted.small{font-size:13.5px}
+.empty p,.sheet .sub{font-size:14.5px}
+.bubble{font-size:14.5px}
+.lvl{font-size:13px}
+.chap .p{font-size:13px}
+.chapter .sub{font-size:13.5px}
+.setrow{font-size:16px}
+.setrow .v{font-size:13.5px}
+.setrow small{font-size:13px}
+.desc{font-size:15px}
+/* onboarding : question et phrase d'explication plus grandes */
+.onb .greet.sm{font-size:34px;line-height:1.08}
+.onb .date{font-size:15.5px;line-height:1.45;margin-top:10px}

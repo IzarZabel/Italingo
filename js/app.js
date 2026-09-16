@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   const A = window.ITALINGO_ASSETS;
-  const VERSION_APP = '0.1.0 · socle';
+  const VERSION_APP = '0.1.1 · socle';
   let PROG = null;            // programme.json (niveaux + chapitres)
   let etat = Store.charger();
 
@@ -675,7 +675,7 @@
   function onboarding(fin) {
     let etape = 0;
     const brouillon = { prenom: etat.profil.prenom || '', objectif: etat.profil.objectif || 10, rappel: true, heure: '08:30' };
-    const ecran = h('div', { class: 'screen', style: 'z-index:90' });
+    const ecran = h('div', { class: 'screen onb', style: 'z-index:90' });
     const cadre = (pose, contenu) => h('div', { class: 'scroll' },
       h('div', { style: 'position:relative;height:250px;margin:0 calc(-1 * var(--pad))' }, deco('arche-rouille', 'position:absolute;left:50%;transform:translateX(-50%);bottom:8px;width:300px'), lapin(pose, 'position:absolute;left:50%;transform:translateX(-50%);bottom:8px;width:84px')),
       ...contenu);
