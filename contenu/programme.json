@@ -1,0 +1,2712 @@
+{
+ "niveaux": [
+  {
+   "id": "A1.1",
+   "from": 1,
+   "to": 8,
+   "nom": "Débutant"
+  },
+  {
+   "id": "A1.2",
+   "from": 9,
+   "to": 16,
+   "nom": "Débutant"
+  },
+  {
+   "id": "A2.1",
+   "from": 17,
+   "to": 25,
+   "nom": "Élémentaire"
+  },
+  {
+   "id": "A2.2",
+   "from": 26,
+   "to": 34,
+   "nom": "Élémentaire"
+  },
+  {
+   "id": "B1.1",
+   "from": 35,
+   "to": 44,
+   "nom": "Seuil"
+  },
+  {
+   "id": "B1.2",
+   "from": 45,
+   "to": 54,
+   "nom": "Seuil"
+  },
+  {
+   "id": "B2.1",
+   "from": 55,
+   "to": 64,
+   "nom": "Avancé"
+  },
+  {
+   "id": "B2.2",
+   "from": 65,
+   "to": 74,
+   "nom": "Avancé"
+  }
+ ],
+ "chapitres": [
+  {
+   "n": 1,
+   "it": "Ciao! Piacere!",
+   "fr": "Saluer et se présenter",
+   "intro": "Les tout premiers mots : saluer selon le moment de la journée, dire son nom et son origine, choisir entre tu et Lei, et savoir dire qu'on n'a pas compris. Le chapitre pose aussi l'alphabet et les cinq voyelles italiennes.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Ciao, come stai?",
+     "sous": "saluer selon le moment et demander comment ça va"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Io sono, tu sei",
+     "sous": "les pronoms et essere"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Di dove sei?",
+     "sous": "pays et nationalités"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Piacere, Marco!",
+     "sous": "deux présentations, en tu et en Lei"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Essere au singulier + mi chiamo, ti chiami, si chiama",
+     "sous": ""
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "L'alfabeto e le vocali",
+     "sous": ""
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "I numeri da 0 a 10",
+     "sous": ""
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Tu o Lei?",
+     "sous": "la question et la négation"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Mi presento",
+     "sous": "se présenter en trois phrases, à l'oral puis à l'écrit"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Scusi, non capisco",
+     "sous": "ripetere, più lentamente, come si scrive?"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre une salutation et une présentation très simples si l'on parle lentement."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux saluer, demander comment ça va, me présenter et demander à quelqu'un son nom et son origine."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux dire que je ne comprends pas et demander de répéter."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux reconnaître des mots familiers (bonjour, merci, oui/non) sur une affiche ou un écran."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire mon nom et mon pays sur un formulaire simple."
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "it": "Chi sei? Dati personali",
+   "fr": "Parler de soi : âge, métier, ville",
+   "intro": "Donner et demander les informations d'identité de base — âge, profession, ville, langues — et savoir remplir un formulaire ou épeler son nom au téléphone. Premier verbe régulier et premier article.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Che lavoro fai?",
+     "sous": "les professions"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Un, una, uno",
+     "sous": "le genre et l'article indéfini"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "I numeri da 11 a 30, le dizaines et l'età",
+     "sous": ""
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Dove abiti?",
+     "sous": "deux inconnus dans un train"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Avere et les verbes en -are (io, tu, lui/lei)",
+     "sous": ""
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Casa, cena, chiesa",
+     "sous": "le c et le g"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Dati personali",
+     "sous": "nome, cognome, indirizzo"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Italiano, italiana, francese",
+     "sous": "les adjectifs de nationalité"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "La mia carta d'identità",
+     "sous": "remplir un formulaire, se présenter en cinq phrases"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Come si scrive?",
+     "sous": "épeler, numéros de téléphone"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux dire mon âge, ma profession, où j'habite et quelles langues je parle, et poser ces questions."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux remplir un formulaire avec mes données personnelles (nom, nationalité, adresse)."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre quelqu'un qui épelle un nom ou donne un numéro lentement."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une fiche d'identité ou une carte de visite simple."
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "it": "Al bar",
+   "fr": "Commander et payer au bar",
+   "intro": "Le premier lieu de vie italien : commander un café et un cornetto, demander le prix, payer à la caisse. On y apprend les articles définis, le pluriel et les nombres jusqu'à 100.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Un caffè, per favore",
+     "sous": "les boissons"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Il, la, lo, l'",
+     "sous": "l'article défini au singulier"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Cornetto e cappuccino",
+     "sous": "ce qu'on mange au bar"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Al banco",
+     "sous": "commander et payer"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Prendere, volere (vorrei) et pagare au singulier",
+     "sous": ""
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Caffè, cappuccino",
+     "sous": "les doubles consonnes"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "I numeri fino a 100 e i prezzi",
+     "sous": ""
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "I, gli, le",
+     "sous": "l'article et le nom au pluriel"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Ordino io!",
+     "sous": "commander pour deux à l'oral ; écrire une commande"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Quant'è?",
+     "sous": "payer, l'addition, le reçu"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux commander une boisson et quelque chose à manger au bar, demander le prix et payer."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux exprimer une préférence simple (preferisco il tè)."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre le prix et les questions simples du serveur (Al banco o al tavolo? Zucchero?)."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux lire une carte de bar et repérer les prix."
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "it": "In giro per la città",
+   "fr": "S'orienter en ville",
+   "intro": "Demander où se trouve un lieu, comprendre « à droite, à gauche, tout droit », lire panneaux et enseignes. C'è / ci sono, les premières prépositions de lieu et le verbe andare.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "In città",
+     "sous": "la piazza, la stazione, la farmacia"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "C'è, ci sono",
+     "sous": ""
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "A destra, a sinistra, sempre dritto",
+     "sous": ""
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Scusi, dov'è la stazione?",
+     "sous": ""
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Andare (vado, vai, va, andiamo), girare, attraversare",
+     "sous": ""
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Semàforo, edìcola",
+     "sous": "l'accent tonique"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Cartelli e insegne",
+     "sous": "aperto, chiuso, uscita, spingere, tirare, vietato"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Al, alla, in centro",
+     "sous": "a et in avec les lieux"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Il mio quartiere",
+     "sous": "décrire son quartier en quatre phrases ; écrire un itinéraire de deux lignes"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Andiamo al museo?",
+     "sous": "proposer et se mettre d'accord"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux demander où se trouve un lieu et vérifier que j'ai compris (A destra? Grazie!)."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre une indication d'itinéraire très simple (à droite, à gauche, tout droit) si on me parle lentement."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre les panneaux et enseignes courants (uscita, entrata, aperto, chiuso, vietato)."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux dire ce qu'il y a dans un quartier (C'è una piazza, ci sono due bar)."
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "it": "La mia famiglia",
+   "fr": "Famille, amis et description",
+   "intro": "Présenter sa famille et ses amis, décrire quelqu'un en quelques mots. Les possessifs (et la règle « mio padre » sans article), l'accord de l'adjectif, les verbes en -ere.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Mamma, papà, fratello, sorella",
+     "sous": ""
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Mio, tuo, suo",
+     "sous": "les possessifs, et pourquoi « mio padre » sans article"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Alto, biondo, simpatico",
+     "sous": "décrire quelqu'un"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Questa è la mia famiglia",
+     "sous": "une photo commentée (questo / questa en formule)"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Vivere, leggere, vedere",
+     "sous": "les verbes en -ere ; noi abbiamo"
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Famiglia, figlio, bagno",
+     "sous": "gli et gn"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Amici, colleghi e animali",
+     "sous": ""
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Alto, alta, alti, alte",
+     "sous": "l'accord de l'adjectif"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Ti presento…",
+     "sous": "présenter deux personnes à l'oral ; écrire trois phrases sur sa famille"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Hai fratelli?",
+     "sous": "une conversation sur la famille"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux présenter ma famille et mes amis et dire qui ils sont."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire quelqu'un en quelques mots (grand, brun, gentil)."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre quelqu'un qui présente sa famille avec des mots simples."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire quelques phrases simples sur ma famille."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une légende de photo ou un faire-part très simple."
+    }
+   ]
+  },
+  {
+   "n": 6,
+   "it": "Che ore sono? La giornata",
+   "fr": "L'heure, les jours, la routine",
+   "intro": "Dire l'heure et les horaires, nommer les jours, raconter sa journée habituelle et fixer un rendez-vous. Les réfléchis de la routine en formules, fare et les verbes en -ire.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Che ore sono?",
+     "sous": "l'heure"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Sono le nove, è l'una",
+     "sous": "dire l'heure"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Lunedì, martedì…",
+     "sous": "les jours et les moments de la journée"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "A che ora apre?",
+     "sous": "les horaires d'un musée"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Fare, dormire, finire",
+     "sous": "et les réfléchis mi alzo, mi sveglio"
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Ora, arrivo, birra",
+     "sous": "le r et le rr"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "La mia routine",
+     "sous": "les verbes du quotidien"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Sempre, spesso, mai",
+     "sous": "la fréquence et « di solito »"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "La mia giornata tipo",
+     "sous": "raconter sa journée à l'oral ; écrire son agenda"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Ci vediamo alle otto?",
+     "sous": "fixer un rendez-vous"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux demander et dire l'heure et parler d'horaires."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire ma journée habituelle en phrases simples."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre une heure ou un horaire annoncés lentement."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux lire un horaire d'ouverture et un agenda simple."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux noter un rendez-vous (jour, heure, lieu)."
+    }
+   ]
+  },
+  {
+   "n": 7,
+   "it": "Fare la spesa",
+   "fr": "Au marché et au supermarché",
+   "intro": "Acheter à manger : demander un produit et une quantité, comprendre « Desidera? Altro? », payer. Les verbes potere, volere, dovere, le démonstratif et les nombres jusqu'à 1 000.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Al mercato",
+     "sous": "frutta e verdura"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Un chilo di pomodori",
+     "sous": "les quantités"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Pane, latte, formaggio",
+     "sous": "l'épicerie du quotidien"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Desidera?",
+     "sous": "au marché"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Potere, volere, dovere",
+     "sous": ""
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Pesce, pesche, prosciutto",
+     "sous": "sc et sch"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "I numeri fino a 1000 e i negozi",
+     "sous": ""
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Questo, quello",
+     "sous": "montrer ce qu'on veut"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "La mia lista della spesa",
+     "sous": "écrire une liste ; demander cinq produits à l'oral"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Basta così, grazie",
+     "sous": "terminer un achat"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux acheter des produits alimentaires en indiquant la quantité et demander le prix."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les questions du vendeur (Desidera? Altro?) et un prix."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux lire une liste de courses, des étiquettes et des prix au kilo."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une liste de courses."
+    }
+   ]
+  },
+  {
+   "n": 8,
+   "it": "Buon appetito! Al ristorante",
+   "fr": "Au restaurant",
+   "intro": "Réserver, lire le menu, commander un repas complet, dire ce qu'on aime, demander l'addition. Le verbe piacere, avere fame/sete, et les petites prépositions de la table. Le bilan de ce chapitre clôt le demi-niveau A1.1.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Antipasto, primo, secondo",
+     "sous": "le menu italien"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Mi piace, mi piacciono",
+     "sous": ""
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Buono, dolce, piccante",
+     "sous": "parler du goût"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Un tavolo per due",
+     "sous": "réserver et s'installer"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Mangiare, bere, ordinare",
+     "sous": "et le verbe piacere"
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Pizza, zucchero, grazie",
+     "sous": "la lettre z"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Da bere",
+     "sous": "vino, acqua, birra et les boissons du repas"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Per me, con, senza, anche a me",
+     "sous": ""
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Il mio piatto preferito",
+     "sous": "parler de ses goûts ; écrire un message de réservation"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Il conto, per favore",
+     "sous": "fin de repas, coperto, mancia"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "Bilan A1.1",
+     "sous": "le bilan de ce chapitre valide aussi le demi-niveau A1.1 (descripteurs des chapitres 1 à 8)."
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux réserver une table, commander un repas complet et demander l'addition."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux dire ce que j'aime et ce que je n'aime pas manger."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les questions du serveur (Da bere? Tutto bene? Dolce o caffè?)."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un menu simple et ses rubriques."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un message très court pour réserver (jour, heure, nombre de personnes)."
+    }
+   ]
+  },
+  {
+   "n": 9,
+   "it": "A casa mia",
+   "fr": "Le logement",
+   "intro": "Décrire son logement, dire où sont les choses, nommer les couleurs, donner l'étage. Les prépositions de lieu, le tableau complet des prépositions contractées et les ordinaux.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Cucina, camera, bagno",
+     "sous": "les pièces"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Sopra, sotto, vicino a",
+     "sous": "où sont les choses"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Letto, tavolo, divano",
+     "sous": "les meubles"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Vieni a casa mia?",
+     "sous": "la visite d'un appartement"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Stare et venire",
+     "sous": "sto, stai, sta ; vengo, vieni, viene"
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Grande, camera, letto",
+     "sous": "les voyelles finales, e et o"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Rosso, verde, blu",
+     "sous": "les couleurs"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Del, al, dal, nel, sul",
+     "sous": "les prépositions contractées"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "La casa dei miei sogni",
+     "sous": "décrire sa maison à l'oral ; écrire une annonce de trois lignes"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "A che piano?",
+     "sous": "interphone, étage, ascenseur"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire mon logement et dire où sont les choses."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux inviter quelqu'un chez moi et indiquer l'étage."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre la description simple d'un appartement, lue lentement."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une annonce de location très simple (pièces, étage, prix)."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire quelques phrases pour décrire ma maison."
+    }
+   ]
+  },
+  {
+   "n": 10,
+   "it": "Il tempo libero",
+   "fr": "Loisirs et invitations",
+   "intro": "Parler de ce qu'on aime faire, proposer une sortie, accepter ou refuser. C'est ici que la conjugaison passe aux six personnes, pour tous les verbes réguliers et les irréguliers déjà rencontrés.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Cosa fai nel tempo libero?",
+     "sous": ""
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Mi piace leggere",
+     "sous": "aimer faire"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Sport e musica",
+     "sous": "giocare, fare, suonare"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Ti va di andare al cinema stasera?",
+     "sous": ""
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Parlo, parli, parla, parliamo, parlate, parlano",
+     "sous": "les six personnes"
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Università, quando, guardare",
+     "sous": "u, qu, gu"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Volentieri! Mi dispiace",
+     "sous": "accepter et refuser"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "So nuotare",
+     "sous": "sapere + infinitif ; andare, fare, uscire aux six personnes"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Le mie passioni",
+     "sous": "parler une minute ; écrire un message d'invitation"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Che facciamo domenica?",
+     "sous": "organiser un dimanche à trois"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux parler de mes loisirs et dire ce que j'aime faire."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux proposer une sortie et accepter ou refuser une invitation."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre une invitation simple, avec l'heure et le lieu proposés."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un court message pour inviter un ami."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un programme (cinéma, concert) et y repérer l'heure et le prix."
+    }
+   ]
+  },
+  {
+   "n": 11,
+   "it": "Che tempo fa? Mesi e stagioni",
+   "fr": "Météo, dates et saisons",
+   "intro": "Parler du temps qu'il fait, des saisons et des mois, donner la date et son anniversaire, écrire sa première carte postale. Les expressions météo, la date, molto/poco/troppo.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Sole, pioggia, vento",
+     "sous": "le temps qu'il fait"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Fa caldo, c'è il sole, piove",
+     "sous": "parler du temps"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Gennaio, febbraio…",
+     "sous": "les mois et les saisons"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Che tempo fa a Roma?",
+     "sous": "deux amis au téléphone, dans deux villes"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Piovere, nevicare",
+     "sous": "et le verbe fare dans les expressions"
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Vento, bene, inverno",
+     "sous": "pas de voyelles nasales"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Compleanno, Natale, Ferragosto",
+     "sous": "dates et fêtes"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Il 5 maggio, in estate, nel 2026",
+     "sous": "la date ; molto, poco, troppo"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Cartolina dalle vacanze",
+     "sous": "écrire une carte postale ; décrire une saison à l'oral"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Quando è il tuo compleanno?",
+     "sous": "dates et invitations"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux parler du temps qu'il fait et de la saison."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux donner la date et dire quand est mon anniversaire."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre un bulletin météo très simple (sole, pioggia, gradi)."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux lire une date et un calendrier."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une carte postale de vacances très simple (lieu, temps, activité)."
+    }
+   ]
+  },
+  {
+   "n": 12,
+   "it": "Fare shopping: vestiti e taglie",
+   "fr": "Acheter des vêtements",
+   "intro": "Acheter un vêtement ou des chaussures, essayer, dire que c'est trop grand ou trop cher, payer, échanger. Les démonstratifs au complet et les premiers pronoms lo / la en formules.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Maglietta, pantaloni, scarpe",
+     "sous": ""
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Questo o quello?",
+     "sous": "les démonstratifs au complet"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Che taglia porta? Che numero?",
+     "sous": ""
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Posso provarlo?",
+     "sous": "dans un magasin"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Preferire, capire, finire (-isc)",
+     "sous": "et « lo prendo »"
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Casa, rosa, borsa",
+     "sous": "le s sourd et sonore"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Contanti o carta?",
+     "sous": "payer, saldi, sconto"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Troppo caro, un po' stretto, ho bisogno di",
+     "sous": ""
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "La mia valigia",
+     "sous": "décrire sa tenue à l'oral ; écrire sa liste de valise"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Vorrei cambiarlo",
+     "sous": "échanger, rendre, le reçu"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux acheter un vêtement en indiquant taille et couleur et demander à l'essayer."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux dire qu'un article est trop grand, trop petit ou trop cher."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les questions du vendeur (Che taglia? Le piace? Paga con la carta?)."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux lire une étiquette (taille, prix, matière) et une affiche de soldes."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire la liste de ce que j'emporte en voyage."
+    }
+   ]
+  },
+  {
+   "n": 13,
+   "it": "In viaggio: treno, aereo, autobus",
+   "fr": "Se déplacer en Italie",
+   "intro": "Acheter un billet, trouver son quai, comprendre une annonce de retard, prendre le bus et l'avion. Les prépositions de temps, le présent à valeur de futur, « quanto ci vuole? ».",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Alla stazione",
+     "sous": "biglietto, binario, orario"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Alle otto, dalle nove alle dieci",
+     "sous": "les prépositions de temps"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Autobus, metro, tram",
+     "sous": "se déplacer en ville"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Un biglietto per Firenze, per favore",
+     "sous": ""
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Partire, arrivare, salire, scendere",
+     "sous": ""
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Pàrtono, arrìvano",
+     "sous": "l'accent à la 3e personne du pluriel"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "All'aeroporto",
+     "sous": "volo, imbarco, bagaglio"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Devo cambiare? Quanto ci vuole?",
+     "sous": ""
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Il mio viaggio",
+     "sous": "raconter un trajet au présent ; écrire un SMS d'arrivée"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Il treno è in ritardo",
+     "sous": "annonces et imprévus"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux acheter un billet de train ou de bus et demander l'heure de départ et le quai."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux demander combien de temps dure un trajet et s'il faut changer."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre une annonce simple en gare (quai, retard) si elle est claire et lente."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux lire un tableau d'horaires, un billet et les panneaux d'une gare ou d'un aéroport."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un message très court pour dire à quelle heure j'arrive."
+    }
+   ]
+  },
+  {
+   "n": 14,
+   "it": "In albergo",
+   "fr": "À l'hôtel",
+   "intro": "Réserver une chambre, faire le check-in et remplir la fiche, demander des services, signaler un problème. La négation, les dates de séjour, potere / volere / dovere aux six personnes.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Camera singola, doppia, matrimoniale",
+     "sous": ""
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Non c'è, non funziona, non… più",
+     "sous": "la négation au complet"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Chiave, asciugamano, colazione",
+     "sous": "les services"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Ho una prenotazione",
+     "sous": "le check-in"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Potere, volere, dovere aux six personnes ; « Può + infinitif »",
+     "sous": ""
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Hotel, ho, hai",
+     "sous": "le h muet ; épeler son nom"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "B&B, ostello, agriturismo",
+     "sous": "se loger en Italie"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Dal 3 al 6 luglio",
+     "sous": "durée et dates de séjour"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Vorrei prenotare",
+     "sous": "un e-mail de réservation ; réserver par téléphone à l'oral"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "C'è un problema",
+     "sous": "acqua calda, wifi, rumore"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux réserver une chambre, faire le check-in et demander des services simples."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux signaler un problème simple dans la chambre."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les questions de la réception (documento, colazione, chiave)."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un e-mail de confirmation et le règlement affiché (horaires)."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux remplir la fiche d'hôtel et écrire un e-mail très court pour réserver."
+    }
+   ]
+  },
+  {
+   "n": 15,
+   "it": "Che cosa hai fatto ieri?",
+   "fr": "Raconter son week-end",
+   "intro": "Premier contact avec le passé : dire en phrases courtes ce qu'on a fait hier ou ce week-end, avec le passato prossimo et avere. Un pont vers A2, où le système du passé sera complété.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Ieri, stamattina, la settimana scorsa",
+     "sous": "situer dans le passé"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Ho mangiato, ho visto",
+     "sous": "le passé composé avec avere"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Visitare, comprare, incontrare",
+     "sous": "les verbes du week-end"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "Com'è andato il weekend?",
+     "sous": ""
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Fatto, visto, preso, letto, detto, bevuto",
+     "sous": "les participes irréguliers"
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Mangiàto, finìto",
+     "sous": "l'accent des participes"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Bello, noioso, divertente",
+     "sous": "donner son avis"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Non ho ancora…, ho già…",
+     "sous": "già et ancora"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Il mio weekend",
+     "sous": "raconter à l'oral ; écrire quatre phrases à un ami"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Hai visto il Colosseo?",
+     "sous": "raconter une visite, conseiller"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "bilan du chapitre (≥ 70 % ouvre le chapitre suivant)",
+     "sous": ""
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux dire en phrases simples ce que j'ai fait hier ou ce week-end."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre quelqu'un qui raconte simplement sa journée passée."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un message court pour raconter ma journée (trois ou quatre phrases)."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un court message d'un ami racontant son week-end."
+    }
+   ]
+  },
+  {
+   "n": 16,
+   "it": "Aiuto! Piccoli problemi di viaggio",
+   "fr": "Demander de l'aide, petits soucis de santé",
+   "intro": "Le chapitre de sécurité du voyageur : demander de l'aide, dire qu'on a perdu quelque chose, expliquer un malaise à la pharmacie, comprendre des consignes. Le passato prossimo avec essere et l'impératif poli en formules. Son bilan valide le niveau A1.",
+   "lecons": [
+    {
+     "n": 1,
+     "type": "Vocabulaire",
+     "titre": "Aiuto!",
+     "sous": "polizia, farmacia, ospedale"
+    },
+    {
+     "n": 2,
+     "type": "Grammaire",
+     "titre": "Sono andata, sono arrivata",
+     "sous": "le passé composé avec essere"
+    },
+    {
+     "n": 3,
+     "type": "Vocabulaire",
+     "titre": "Ho perso il portafoglio",
+     "sous": "objets et mésaventures"
+    },
+    {
+     "n": 4,
+     "type": "Dialogue",
+     "titre": "In farmacia",
+     "sous": "mi fa male la testa"
+    },
+    {
+     "n": 5,
+     "type": "Conjugaison",
+     "titre": "Essere, andare, arrivare, stare au passé ; stare bene / male",
+     "sous": ""
+    },
+    {
+     "n": 6,
+     "type": "Prononciation",
+     "titre": "Città, caffè, perché",
+     "sous": "l'accent final"
+    },
+    {
+     "n": 7,
+     "type": "Vocabulaire",
+     "titre": "Testa, gola, stomaco",
+     "sous": "le corps et les petits maux"
+    },
+    {
+     "n": 8,
+     "type": "Grammaire",
+     "titre": "Scusi, senta, aspetti",
+     "sous": "les formules de l'impératif poli"
+    },
+    {
+     "n": 9,
+     "type": "Expression",
+     "titre": "Che cosa è successo?",
+     "sous": "raconter une mésaventure à l'oral ; écrire un message d'alerte"
+    },
+    {
+     "n": 10,
+     "type": "Dialogue",
+     "titre": "Al pronto soccorso, dai carabinieri",
+     "sous": "une déclaration simple"
+    },
+    {
+     "n": 11,
+     "type": "Bilan",
+     "titre": "Bilan A1",
+     "sous": "le bilan de ce chapitre valide le demi-niveau A1.2 et le niveau A1 complet (tous les descripteurs des chapitres 1 à 16)."
+    }
+   ],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux demander de l'aide et expliquer un problème simple (objet perdu, malaise) avec des mots simples."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux dire que je ne parle pas bien italien et demander à quelqu'un de parler plus lentement."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre des consignes simples (Aspetti, Firmi qui, Venga con me)."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre les indications essentielles d'une pharmacie ou d'un panneau d'urgence."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un message simple pour dire où je suis et ce qui s'est passé."
+    }
+   ]
+  },
+  {
+   "n": 17,
+   "it": "Raccontare il passato: il passato prossimo",
+   "fr": "Le passé composé au complet",
+   "intro": "Le système du passé se met en place : avere ou essere, tous les participes irréguliers courants, l'accord. On raconte sa journée, son week-end, un événement récent.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux raconter ce que j'ai fait récemment en quelques phrases liées."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre un récit simple d'événements passés."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un court message racontant un événement."
+    }
+   ]
+  },
+  {
+   "n": 18,
+   "it": "La mia routine: i verbi riflessivi",
+   "fr": "La routine et les réfléchis",
+   "intro": "Toutes les personnes des verbes réfléchis et réciproques, au présent et au passé ; la routine devient un vrai récit du quotidien, comparé à celui d'un ami italien.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire en détail ma journée type et celle de quelqu'un d'autre."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un texte court décrivant la routine d'une personne."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre quelqu'un qui décrit ses habitudes quotidiennes."
+    }
+   ]
+  },
+  {
+   "n": 19,
+   "it": "Scusi, per andare a…?",
+   "fr": "Itinéraires et impératif",
+   "intro": "Demander et donner un itinéraire complet, comprendre les indications d'un passant ou d'une appli, lire un plan. L'impératif informel et les locutions de lieu.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux demander et expliquer un itinéraire simple en plusieurs étapes."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux suivre des indications de chemin en plusieurs étapes, données clairement."
+    }
+   ]
+  },
+  {
+   "n": 20,
+   "it": "Una vacanza indimenticabile",
+   "fr": "Raconter un voyage",
+   "intro": "Le récit de vacances : ce qu'on a fait (passato prossimo) et comment c'était (era, c'era, faceva caldo). Mer, montagne, hébergements, bilan d'un séjour.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux raconter mes vacances et dire ce qui m'a plu."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une carte ou un e-mail de vacances de quelques lignes."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre quelqu'un qui raconte simplement un voyage."
+    }
+   ]
+  },
+  {
+   "n": 21,
+   "it": "Dal medico",
+   "fr": "Santé : consulter et se soigner",
+   "intro": "Décrire des symptômes, comprendre les questions du médecin et une ordonnance, acheter des médicaments, suivre des conseils. Le corps au complet et stare + gerundio.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux expliquer un problème de santé simple à un médecin ou à un pharmacien."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre des conseils et une posologie donnés clairement."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une notice ou une ordonnance simple."
+    }
+   ]
+  },
+  {
+   "n": 22,
+   "it": "In cucina: ricette e sapori",
+   "fr": "Cuisiner et parler de nourriture",
+   "intro": "Lire et expliquer une recette, parler de ce qu'on mange, décrire un plat régional. L'impératif à la 2e personne du pluriel des recettes et les pronoms directs.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une recette simple."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux expliquer comment je prépare un plat simple."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les étapes d'une recette expliquée oralement."
+    }
+   ]
+  },
+  {
+   "n": 23,
+   "it": "Progetti e futuro",
+   "fr": "Projets et avenir",
+   "intro": "Parler de ses projets, faire des prévisions, poser des conditions simples. Le futur simple et « se + présent ».",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux parler de mes projets et faire des prévisions simples."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un message décrivant un projet ou un programme."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre des prévisions météo et des annonces de programme."
+    }
+   ]
+  },
+  {
+   "n": 24,
+   "it": "Al telefono e per e-mail",
+   "fr": "Téléphoner et écrire",
+   "intro": "Prendre un rendez-vous par téléphone, réserver, laisser un message, écrire un e-mail simple et poli. Les pronoms indirects et les formules formelles.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux téléphoner pour prendre ou modifier un rendez-vous et laisser un message simple."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un e-mail simple et poli pour réserver, demander ou remercier."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre un message vocal simple."
+    }
+   ]
+  },
+  {
+   "n": 25,
+   "it": "Com'è? Persone e caratteri",
+   "fr": "Décrire et comparer les personnes",
+   "intro": "Décrire l'apparence et le caractère, comparer, parler de ses proches et de ses collègues. Le comparatif, les possessifs complets, le relatif che. Le bilan de ce chapitre clôt A2.1.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire une personne et la comparer à une autre."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire quelques phrases pour présenter un ami ou un collègue."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre la description d'une personne dans un texte simple."
+    }
+   ]
+  },
+  {
+   "n": 26,
+   "it": "Casa dolce casa: cercare casa",
+   "fr": "Chercher un logement",
+   "intro": "Lire des annonces, visiter, décrire son quartier idéal, expliquer depuis combien de temps on habite quelque part. Les prépositions da, su, tra et le pronom ci.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une annonce de logement et un descriptif simple."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire mon logement idéal et poser des questions lors d'une visite."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre la présentation d'un logement par un propriétaire ou une agence."
+    }
+   ]
+  },
+  {
+   "n": 27,
+   "it": "Fare acquisti: negozi e saldi",
+   "fr": "Faire des achats",
+   "intro": "Le shopping au complet : magasins spécialisés, soldes, échanges, réclamation simple. Les pronoms directs au passé et « quale ».",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux effectuer des achats courants, demander un échange ou un remboursement."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les explications d'un vendeur sur un produit."
+    }
+   ]
+  },
+  {
+   "n": 28,
+   "it": "Feste e tradizioni",
+   "fr": "Fêtes, vœux et invitations",
+   "intro": "Les fêtes italiennes et familiales : inviter, accepter, décliner, présenter ses vœux, offrir un cadeau. L'impératif noi et les formules rituelles.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux inviter quelqu'un, répondre à une invitation et présenter mes vœux."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une invitation ou une carte de vœux."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une invitation écrite et ses détails pratiques."
+    }
+   ]
+  },
+  {
+   "n": 29,
+   "it": "Il lavoro e lo studio",
+   "fr": "Travail et études",
+   "intro": "Parler de son métier, de ses horaires, de son parcours ; comprendre une petite annonce ; décrire une journée de travail. Già, appena, non ancora avec le passé.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire mon travail et mon parcours en termes simples."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une petite annonce d'emploi."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une présentation courte de mon activité."
+    }
+   ]
+  },
+  {
+   "n": 30,
+   "it": "Muoversi in Italia: ritardi e imprevisti",
+   "fr": "Transports : imprévus et excuses",
+   "intro": "Grève, retard, correspondance manquée, remboursement : gérer les imprévus des transports, s'excuser, prévenir qu'on arrive. Le gérondif avec stare et les excuses.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux faire face à un imprévu de transport : expliquer, m'excuser, demander une solution."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre des annonces claires en gare ou à l'aéroport, y compris un changement de quai ou un retard."
+    }
+   ]
+  },
+  {
+   "n": 31,
+   "it": "L'Italia: regioni, città, geografia",
+   "fr": "Découvrir l'Italie",
+   "intro": "Régions, villes, climat, spécialités : décrire un lieu, dire où on est allé, comparer des destinations. Les articles avec les noms géographiques et « ci sono stato ».",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire une région italienne et dire ce que j'y ai fait ou ce que je conseille."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une brochure touristique simple."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre une présentation simple d'une ville ou d'une région."
+    }
+   ]
+  },
+  {
+   "n": 32,
+   "it": "Come eravamo: ricordi d'infanzia",
+   "fr": "Souvenirs et imparfait",
+   "intro": "L'imparfait complet pour raconter les habitudes du passé : l'enfance, l'école, la ville d'autrefois, un souvenir de vacances d'enfant.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux raconter des souvenirs et des habitudes de mon enfance."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire quelques lignes sur un souvenir."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre quelqu'un qui évoque son passé simplement."
+    }
+   ]
+  },
+  {
+   "n": 33,
+   "it": "Media, tecnologia e messaggi",
+   "fr": "Messages, réseaux, opinions simples",
+   "intro": "Smartphone, réseaux, messages : écrire des notes et des messages du quotidien, exprimer un avis simple, être d'accord ou non.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire des messages courts du quotidien et répondre à des messages."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux donner un avis simple et dire si je suis d'accord."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre des messages et des publications courtes."
+    }
+   ]
+  },
+  {
+   "n": 34,
+   "it": "Un weekend fuori porta: organizziamo insieme",
+   "fr": "Organiser une escapade",
+   "intro": "Le grand projet commun : choisir la destination, réserver, se répartir les tâches, faire le programme et le raconter. Toutes les compétences A2 réunies avant le bilan de niveau.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux organiser une sortie ou un week-end avec d'autres personnes : proposer, réserver, décider."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un programme et un message récapitulatif."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre l'essentiel d'une discussion simple entre amis qui organisent quelque chose."
+    }
+   ]
+  },
+  {
+   "n": 35,
+   "it": "Raccontare: imperfetto e passato prossimo insieme",
+   "fr": "Le récit au passé",
+   "intro": "Le cœur du récit : ce qui se passait et ce qui s'est passé. Anecdotes, histoires vraies, un fait divers léger.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux raconter une histoire ou une anecdote de manière suivie."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire le récit d'une expérience passée (100 mots)."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux suivre un récit oral à vitesse normale."
+    }
+   ]
+  },
+  {
+   "n": 36,
+   "it": "Prima ancora: il trapassato prossimo",
+   "fr": "L'antériorité dans le récit",
+   "intro": "Ordonner les événements : ce qui s'était passé avant. Mésaventures de voyage racontées avec finesse.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux raconter une mésaventure en expliquant ce qui s'était passé avant."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un récit écrit avec plusieurs plans temporels."
+    }
+   ]
+  },
+  {
+   "n": 37,
+   "it": "Consigli e desideri: il condizionale",
+   "fr": "Conseiller, souhaiter, demander poliment",
+   "intro": "Le conditionnel présent pour conseiller, exprimer un souhait et adoucir une demande. Bien-être, stress, décisions.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux donner des conseils et exprimer des souhaits."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un message de conseil ou de demande polie."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre des conseils donnés à l'oral."
+    }
+   ]
+  },
+  {
+   "n": 38,
+   "it": "Lo, la, gli, le… tutti insieme: i pronomi",
+   "fr": "Les pronoms au complet",
+   "intro": "Directs, indirects, combinés, ne, ci : les pronoms qui rendent l'italien fluide. Offrir, prêter, rendre, demander un service.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux demander un service, offrir et rendre en m'exprimant avec naturel."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un texte où les pronoms remplacent les noms."
+    }
+   ]
+  },
+  {
+   "n": 39,
+   "it": "Secondo me… il congiuntivo presente",
+   "fr": "Donner son opinion",
+   "intro": "Penso che sia, credo che, mi sembra che, spero che : le subjonctif présent pour dire ce qu'on pense, espère, craint. Débats du quotidien : ville ou campagne, travail, habitudes.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux donner mon opinion et la justifier brièvement, exprimer l'accord et le désaccord."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un court texte d'opinion."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les opinions exprimées dans une discussion simple."
+    }
+   ]
+  },
+  {
+   "n": 40,
+   "it": "In Italia si mangia bene: cucina e tradizioni",
+   "fr": "Cuisine régionale et usages",
+   "intro": "Le si impersonnel pour dire comment on fait en Italie : à table, en cuisine, dans les traditions régionales. Le lexique gastronomique B1.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux expliquer des habitudes culinaires et décrire un plat en détail."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un article simple sur la cuisine ou les traditions."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux suivre une explication culinaire ou un extrait d'émission de cuisine."
+    }
+   ]
+  },
+  {
+   "n": 41,
+   "it": "Meglio o peggio? Confronti",
+   "fr": "Comparer et choisir",
+   "intro": "Comparatifs et superlatifs au complet, adverbes en -mente : comparer des destinations, des quartiers, des offres, et défendre son choix.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux comparer des options et expliquer mon choix."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un texte comparatif court (deux destinations, deux produits)."
+    }
+   ]
+  },
+  {
+   "n": 42,
+   "it": "Un viaggio da organizzare (e un reclamo da scrivere)",
+   "fr": "Organiser, réclamer, écrire formellement",
+   "intro": "Planifier un voyage complexe, comprendre les conditions, et écrire sa première réclamation formelle. Le futur antérieur et la lettre formelle.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une lettre ou un e-mail formel simple pour réclamer ou demander une information."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre les conditions d'une réservation."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux organiser un voyage complexe et régler un problème avec un prestataire."
+    }
+   ]
+  },
+  {
+   "n": 43,
+   "it": "Al lavoro: cercare e raccontare",
+   "fr": "Le monde du travail",
+   "intro": "Chercher un emploi, comprendre une annonce, se présenter en entretien, décrire ses compétences et ses envies. Le relatif cui et les verbes de capacité.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux parler de mon parcours et de mes compétences et me présenter en entretien."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une lettre de motivation simple."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une offre d'emploi détaillée."
+    }
+   ]
+  },
+  {
+   "n": 44,
+   "it": "Cinema, libri e musica",
+   "fr": "Raconter un film, un livre",
+   "intro": "Raconter l'intrigue d'un film ou d'un livre, dire ce qu'on en a pensé, recommander. Le présent de narration et le lexique de la critique. Le bilan de ce chapitre clôt B1.1.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux raconter l'intrigue d'un film ou d'un livre et exprimer mes réactions."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une courte critique."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une critique ou un résumé simple."
+    }
+   ]
+  },
+  {
+   "n": 45,
+   "it": "Ipotesi e probabilità",
+   "fr": "Hypothèses, suppositions",
+   "intro": "Supposer, deviner, poser des conditions réelles : le futur à valeur de supposition et la première période hypothétique.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux formuler des hypothèses et exprimer des degrés de certitude."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre des suppositions dans une conversation."
+    }
+   ]
+  },
+  {
+   "n": 46,
+   "it": "Sentimenti e relazioni",
+   "fr": "Sentiments et relations",
+   "intro": "Parler de ses émotions et de ses relations avec nuance : amitié, famille, couple, disputes et réconciliations. Le subjonctif après les sentiments.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux parler de mes sentiments et de mes relations avec des nuances."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une lettre personnelle décrivant des expériences et des impressions."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre l'expression de sentiments et de souhaits dans une lettre personnelle."
+    }
+   ]
+  },
+  {
+   "n": 47,
+   "it": "Anche se… connettivi e testo",
+   "fr": "Structurer un texte",
+   "intro": "Les connecteurs qui font un texte : concession, opposition, cause, conséquence, explication. Écrire des textes cohérents de 100–120 mots sur la vie en ville et la mobilité.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un texte simple et cohérent sur un sujet familier (100–120 mots)."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un article simple structuré en paragraphes."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux exposer un point de vue simple en l'organisant."
+    }
+   ]
+  },
+  {
+   "n": 48,
+   "it": "Natura, ambiente e animali",
+   "fr": "Nature et environnement",
+   "intro": "Parler de la nature, des animaux, de l'écologie au quotidien ; recommander et exhorter. L'impératif de politesse et « bisogna che ».",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire un environnement naturel et parler de gestes écologiques."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un texte informatif simple sur la nature ou l'environnement."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les points essentiels d'un reportage lent sur un sujet familier."
+    }
+   ]
+  },
+  {
+   "n": 49,
+   "it": "Salute e benessere",
+   "fr": "Santé et bien-être en profondeur",
+   "intro": "Chez le médecin, à la pharmacie, au sport : décrire précisément, comprendre des conseils élaborés, parler d'habitudes de vie.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire un problème de santé en détail et poser des questions précises."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les recommandations détaillées d'un professionnel de santé."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre une notice, un article de santé grand public."
+    }
+   ]
+  },
+  {
+   "n": 50,
+   "it": "La casa e la vita quotidiana in Italia",
+   "fr": "Vivre au quotidien",
+   "intro": "Colocation, tâches ménagères, pannes, voisinage, artisans : le quotidien domestique et ses petits conflits.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux gérer les situations du quotidien domestique : demander, négocier, réclamer."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les explications d'un artisan ou d'un voisin."
+    }
+   ]
+  },
+  {
+   "n": 51,
+   "it": "Notizie e attualità",
+   "fr": "Actualité et discours rapporté",
+   "intro": "Comprendre les grandes lignes d'un journal télévisé ou d'un article simple, rapporter ce que quelqu'un a dit. Le discours indirect au présent et au passé (base).",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre l'essentiel d'un journal ou d'une émission d'actualité si l'on parle clairement."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre les points principaux d'un article d'actualité simple."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux rapporter ce que quelqu'un a dit."
+    }
+   ]
+  },
+  {
+   "n": 52,
+   "it": "Inviti, feste e buone maniere",
+   "fr": "Savoir-vivre et invitations",
+   "intro": "Inviter, accepter, décliner avec tact, promettre, s'excuser, faire un compliment : le savoir-vivre italien à table et en société.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décliner une invitation avec tact, remercier et complimenter avec les formules d'usage."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un remerciement ou des excuses adaptés à la situation."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre les formules rituelles d'une fête ou d'un repas entre Italiens."
+    }
+   ]
+  },
+  {
+   "n": 53,
+   "it": "Storie di città",
+   "fr": "Villes : histoire et description approfondie",
+   "intro": "Décrire une ville dans son histoire et son présent, suivre une visite guidée, situer dans le temps (siècles, époques). Relatifs et superlatifs en contexte culturel.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux décrire une ville et son histoire de façon détaillée."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux suivre une visite guidée en langue standard."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un guide touristique ou un panneau explicatif."
+    }
+   ]
+  },
+  {
+   "n": 54,
+   "it": "Sogni, progetti e scelte",
+   "fr": "Rêves, projets, choix de vie",
+   "intro": "Parler de ses rêves, de ses buts, de ses décisions et les motiver : la synthèse orale et écrite du niveau B1. Le bilan de ce chapitre valide le niveau B1.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux parler de mes rêves, de mes projets et expliquer mes choix."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un texte personnel structuré sur mes projets (120 mots)."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre quelqu'un qui expose ses projets et ses raisons."
+    }
+   ]
+  },
+  {
+   "n": 55,
+   "it": "Pensavo che fosse…: congiuntivo passato e imperfetto",
+   "fr": "Le subjonctif au passé",
+   "intro": "Doute, opinion et incertitude au passé : le subjonctif passé et imparfait, la concordance des temps. Malentendus, rumeurs, souvenirs revisités.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux exprimer des opinions et des doutes sur des faits passés avec les temps appropriés."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre des textes exprimant des jugements nuancés."
+    }
+   ]
+  },
+  {
+   "n": 56,
+   "it": "Se avessi saputo…: il periodo ipotetico",
+   "fr": "Hypothèses et regrets",
+   "intro": "Ce qui pourrait arriver, ce qui aurait pu arriver : périodes hypothétiques de la possibilité et de l'irréel, conditionnel passé. Choix de vie, regrets, voyages alternatifs.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux parler d'hypothèses, de regrets et de ce qui aurait pu se passer."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un texte réflexif sur un choix passé."
+    }
+   ]
+  },
+  {
+   "n": 57,
+   "it": "Pro e contro: argomentare",
+   "fr": "Argumenter",
+   "intro": "Construire une argumentation : thèse, arguments, concessions, conclusion. Débats de société accessibles : tourisme de masse, ville et voiture, réseaux sociaux.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux développer un point de vue, en donner les avantages et les inconvénients, et réagir aux arguments d'autrui."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un texte argumentatif structuré (150 mots)."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux suivre un débat ou une argumentation assez longue sur un sujet familier."
+    }
+   ]
+  },
+  {
+   "n": 58,
+   "it": "C'era una volta: il passato remoto",
+   "fr": "Le passé simple et la narration écrite",
+   "intro": "Lire des récits, des contes, des biographies : le passato remoto, le présent historique, les temps du récit écrit.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un texte narratif ou une biographie utilisant les temps du récit écrit."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une biographie courte au passé en respectant la chronologie (le passé simple restant surtout à reconnaître)."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux résumer une histoire lue."
+    }
+   ]
+  },
+  {
+   "n": 59,
+   "it": "Il lavoro oggi",
+   "fr": "Le travail : parler, écrire, rapporter",
+   "intro": "Carrière, réunions, e-mails professionnels, ce que le collègue a dit : le discours indirect complet et la construction causative.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux rapporter des propos avec précision et intervenir dans une réunion sur un sujet familier."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux rédiger un e-mail professionnel clair et argumenté."
+    }
+   ]
+  },
+  {
+   "n": 60,
+   "it": "Media e informazione",
+   "fr": "Presse, information, passif",
+   "intro": "Lire des articles de presse, distinguer les sources, repérer un point de vue. La forme passive et le si passivant.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Lire",
+     "txt": "Je peux lire des articles sur des questions d'actualité et repérer le point de vue de l'auteur."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre la plupart des journaux télévisés et des reportages."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux résumer un article et le commenter."
+    }
+   ]
+  },
+  {
+   "n": 61,
+   "it": "Società e cittadinanza",
+   "fr": "Société, règles, engagement",
+   "intro": "Institutions, droits et devoirs, règles et interdits, bénévolat : parler de la vie collective. Les finales et les subordonnées au subjonctif.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux discuter de questions de société et expliquer des règles."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un règlement, un article de fond sur la société."
+    }
+   ]
+  },
+  {
+   "n": 62,
+   "it": "Ambiente e futuro del pianeta",
+   "fr": "Environnement et rapport",
+   "intro": "Comprendre et produire des textes informatifs : données, causes, conséquences, propositions. Le gérondif, l'infinitif passé, le participe absolu.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un rapport ou un essai transmettant une information et exposant des raisons pour ou contre."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un article de vulgarisation avec des données."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux suivre une conférence ou un exposé sur un sujet relativement familier."
+    }
+   ]
+  },
+  {
+   "n": 63,
+   "it": "Sfumature: dire con precisione",
+   "fr": "Nuances, registres, expressions idiomatiques",
+   "intro": "Dire exactement ce qu'on veut dire : intensité, ironie, registre, verbes pronominaux idiomatiques, exclamatives au subjonctif.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux m'exprimer avec nuance, avec le registre adapté et des expressions idiomatiques courantes."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre l'ironie et l'humour explicites d'une conversation informelle en langue standard."
+    }
+   ]
+  },
+  {
+   "n": 64,
+   "it": "Lettere e testi formali",
+   "fr": "Écrits formels",
+   "intro": "Lettre de réclamation argumentée, candidature, courrier administratif : les codes de l'écrit formel italien. Le bilan de ce chapitre clôt B2.1.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire des lettres formelles adaptées à leur destinataire et à leur but."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un courrier administratif, un contrat simple."
+    }
+   ]
+  },
+  {
+   "n": 65,
+   "it": "L'Italia delle regioni e dei dialetti",
+   "fr": "Variétés de l'italien",
+   "intro": "L'italien parlé tel qu'il est : régionalismes, dialectes en survol, registre familier, phrases disloquées. Comprendre les Italiens entre eux.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre une conversation animée entre Italiens en langue standard, même légèrement colorée régionalement."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux employer des tournures orales naturelles."
+    }
+   ]
+  },
+  {
+   "n": 66,
+   "it": "Cinema, serie e umorismo",
+   "fr": "Cinéma et humour",
+   "intro": "Films et séries en langue standard : suivre, comprendre l'humour, les jeux de mots et les doubles sens, écrire une critique argumentée.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre la plupart des films et séries en langue standard."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une critique argumentée."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux expliquer un trait d'humour ou une référence culturelle."
+    }
+   ]
+  },
+  {
+   "n": 67,
+   "it": "Scienza, tecnologia e innovazione",
+   "fr": "Sciences et technologies",
+   "intro": "Exposer un sujet technique ou scientifique de façon claire : avantages et inconvénients, probabilités, vulgarisation. Les adjectifs substantivés et l'exposé oral.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux faire un exposé clair et détaillé sur un sujet de mon domaine, en pesant avantages et inconvénients."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un article de vulgarisation scientifique."
+    }
+   ]
+  },
+  {
+   "n": 68,
+   "it": "Storia d'Italia in pillole",
+   "fr": "Histoire d'Italie",
+   "intro": "De Rome au XXe siècle en épisodes : lire des textes historiques, situer, raconter, comparer les époques. Siècles, passif et récit au passé simple.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un texte historique ou un article de fond."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux suivre un documentaire historique."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux exposer un épisode historique et en discuter."
+    }
+   ]
+  },
+  {
+   "n": 69,
+   "it": "Arte, musica e letteratura",
+   "fr": "Lire la littérature contemporaine",
+   "intro": "Lire un texte littéraire contemporain en prose, parler de style, d'art et de musique. Les relatifs complexes et la phrase longue.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un texte littéraire contemporain en prose."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux parler d'art et de littérature avec des nuances."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une présentation d'une œuvre."
+    }
+   ]
+  },
+  {
+   "n": 70,
+   "it": "Viaggiare da esperti",
+   "fr": "Voyager en connaisseur",
+   "intro": "Récits de voyage élaborés, blog, conseils argumentés, tourisme durable : le voyage au niveau B2, jusqu'à la lettre de recommandation ou de réclamation détaillée.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un récit de voyage ou un avis détaillé et argumenté."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux conseiller de façon argumentée et discuter de tourisme."
+    }
+   ]
+  },
+  {
+   "n": 71,
+   "it": "Convivere: vicini, conflitti e soluzioni",
+   "fr": "Négocier et résoudre un conflit",
+   "intro": "Se plaindre, reprocher, s'excuser, négocier, trouver un compromis : la langue des relations tendues et de leur résolution.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux gérer un désaccord : me plaindre, m'excuser, négocier un compromis."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire une plainte ferme mais courtoise."
+    }
+   ]
+  },
+  {
+   "n": 72,
+   "it": "Economia quotidiana e consumi",
+   "fr": "Argent, contrats, consommation",
+   "intro": "Banque, contrats, factures, réclamations, habitudes de consommation : le lexique économique du quotidien et les chiffres.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Lire",
+     "txt": "Je peux comprendre un contrat, une facture, un article économique grand public."
+    },
+    {
+     "comp": "Parler",
+     "txt": "Je peux discuter d'argent, de contrats et de consommation."
+    }
+   ]
+  },
+  {
+   "n": 73,
+   "it": "Parlare in pubblico: presentare e riassumere",
+   "fr": "Présenter, résumer, gérer la parole",
+   "intro": "Faire une présentation structurée, résumer un texte ou un débat, prendre et céder la parole, se corriger : la médiation et l'interaction avancée.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux faire une présentation claire et structurée et participer activement à une discussion en gérant la parole."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre une présentation ou une réunion et en faire la synthèse."
+    }
+   ]
+  },
+  {
+   "n": 74,
+   "it": "Verso il C1: bilancio e autonomia",
+   "fr": "Bilan et autonomie",
+   "intro": "Le chapitre de clôture : récapitulation des structures B2, essai long, conversation libre, stratégies pour continuer seule (lecture, écoute, séries, échanges). Le bilan de ce chapitre valide le niveau B2.",
+   "lecons": [],
+   "jepeux": [
+    {
+     "comp": "Parler",
+     "txt": "Je peux communiquer avec spontanéité et aisance, présenter et défendre mes opinions."
+    },
+    {
+     "comp": "Écrire",
+     "txt": "Je peux écrire un essai ou un rapport clair et détaillé exposant des raisons pour ou contre."
+    },
+    {
+     "comp": "Écouter",
+     "txt": "Je peux comprendre des discours assez longs et suivre une argumentation complexe sur un sujet familier."
+    },
+    {
+     "comp": "Lire",
+     "txt": "Je peux lire des articles de fond et un texte littéraire contemporain."
+    }
+   ]
+  }
+ ]
+}
