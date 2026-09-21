@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+<title>Italingo · Jardin</title>
+<style>
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/instrument-serif-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url(../assets/fonts/instrument-serif-latin-400-italic.woff2) format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/manrope-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Manrope';font-style:normal;font-weight:600;font-display:swap;src:url(../assets/fonts/manrope-latin-600-normal.woff2) format('woff2')}
+</style>
+<style>
+:root{
+  --cacao:#55211E;--cacao-2:#3B1512;--rouille:#C25A3E;--rouille-2:#A84A31;--taupe:#9A837C;--filet:#F0E6E2;
+  --blanc:#FFFFFF;--blush:#F2C4BC;--blush-2:#FBEFEB;--peche:#F8E3D6;--creme:#FAF5F0;--sable:#EFE3D5;--sable-2:#E1CFBC;
+  --sauge-1:#D2D3BE;--sauge-3:#7B8366;--sauge-4:#636D51;
+  --ease:cubic-bezier(.22,.8,.3,1);--spring:cubic-bezier(.34,1.56,.64,1);
+  --serif:"Instrument Serif",Georgia,serif;--sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+html,body{height:100%;margin:0}
+body{background:#E9E2D6;font-family:var(--sans);color:var(--cacao);-webkit-font-smoothing:antialiased;overflow:hidden}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--rouille);outline-offset:2px}
+
+/* cadre téléphone sur grand écran */
+#app{position:relative;width:100%;height:100%;margin:0 auto;background:var(--blanc);overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
+
+/* ---- carte ---- */
+#viewport{position:absolute;inset:0;overflow:hidden;background:#D8CDB8;cursor:grab}
+#viewport.grabbing{cursor:grabbing}
+#world{position:absolute;left:0;top:0;width:4096px;height:4096px;transform-origin:0 0;will-change:transform}
+.tile{position:absolute;overflow:hidden}
+.tile img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;transition:filter 1.2s var(--ease)}
+.tile.locked img{filter:none}
+.tile .veil{position:absolute;inset:14px;border-radius:72px;background:rgba(59,21,18,.46);backdrop-filter:blur(22px) saturate(.7);-webkit-backdrop-filter:blur(22px) saturate(.7);box-shadow:inset 0 0 0 3px rgba(255,255,255,.12);transition:opacity 1.2s var(--ease);display:flex;align-items:center;justify-content:center}
+.tile:not(.locked) .veil{opacity:0;pointer-events:none}
+.tile .veil .lbl{background:rgba(255,255,255,.1);border-radius:60px;padding:26px 44px;text-align:center;box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
+.tile .veil .lbl b{display:block;font:italic 400 92px/1 var(--serif);color:#fff}
+.tile .veil .lbl span{display:block;margin-top:14px;font:600 34px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--peche)}
+/* murs de jonction : fine allée de pierre entre parcelles */
+.seam{position:absolute;background:linear-gradient(90deg,var(--sable-2),var(--sable) 30%,var(--sable) 70%,var(--sable-2));pointer-events:none;z-index:5}
+.seam.v{width:26px;height:3072px;top:0;margin-left:-13px}
+.seam.h{height:26px;width:3072px;left:0;margin-top:-13px;background:linear-gradient(180deg,var(--sable-2),var(--sable) 30%,var(--sable) 70%,var(--sable-2))}
+.seam::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 60px,rgba(85,33,30,.08) 60px 63px);opacity:.7}
+.seam.h::after{background:repeating-linear-gradient(180deg,transparent 0 60px,rgba(85,33,30,.08) 60px 63px)}
+
+/* ambiance jour/nuit */
+#sky{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;transition:background 2s var(--ease);z-index:900000}
+#sky.dawn{background:rgba(250,200,190,.28)}
+#sky.evening{background:rgba(240,160,110,.32)}
+#sky.night{background:rgba(70,80,140,.55)}
+
+/* stickers posés */
+.st{position:absolute;left:0;top:0;transform-origin:50% 100%;touch-action:none;cursor:grab}
+.st img{display:block;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none;}
+.st.flip img{transform:scaleX(-1)}
+.st .sh{display:none}
+.st.perche .sh,.st.eau .sh{opacity:0}
+.st.air{animation:bob 4s ease-in-out infinite}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -3%}}
+.st.sel{filter:drop-shadow(0 0 0 rgba(0,0,0,0))}
+.st.sel::before{content:"";position:absolute;inset:-6% -8%;border:3px dashed var(--rouille);border-radius:18px;opacity:.9}
+.st.pop{animation:pop .7s var(--spring)}
+@keyframes pop{0%{scale:.2;opacity:0}60%{opacity:1}100%{scale:1}}
+.st.lift{cursor:grabbing;z-index:800000!important;transition:none}
+.st.lift img{filter:drop-shadow(0 26px 14px rgba(60,30,20,.25))}
+@media (prefers-reduced-motion:reduce){.st.air{animation:none}.st.pop{animation:none}}
+
+/* Coni */
+#coni{position:absolute;width:132px;height:180px;transform-origin:50% 100%;transition:left 5s linear,top 5s linear;pointer-events:auto;cursor:pointer;touch-action:none;z-index:600000}
+#coni.react-jump .body{animation:cjump .9s var(--spring) 2}
+@keyframes cjump{0%,100%{transform:translateY(0) scale(1)}40%{transform:translateY(-60%) scale(1.04,.96)}}
+#coni.react-shake .body{animation:cshake .5s ease-in-out 2}
+@keyframes cshake{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+#coni .bulle{position:absolute;left:50%;bottom:104%;transform:translateX(-50%) scale(.6);opacity:0;background:#fff;color:var(--rouille);font:600 30px/1 var(--sans);padding:14px 22px;border-radius:40px;white-space:nowrap;box-shadow:0 8px 24px rgba(85,33,30,.18);transition:all .35s var(--spring)}
+#coni .bulle::after{content:"";position:absolute;left:50%;bottom:-12px;width:22px;height:22px;background:#fff;transform:translateX(-50%) rotate(45deg);border-radius:4px}
+#coni.talk .bulle{opacity:1;transform:translateX(-50%) scale(1)}
+#coni.flip .bulle{transform:translateX(-50%) scale(.6) scaleX(1)}
+#coni.flip.talk .bulle{transform:translateX(-50%) scale(1)}
+#coni .body{position:absolute;inset:0}
+#coni.hop .body{animation:hop .42s ease-in-out infinite}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-16%)}}
+#coni img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;opacity:0}
+#coni img.on{opacity:1}
+#coni.flip img{transform:scaleX(-1)}
+@media (prefers-reduced-motion:reduce){#coni.hop .body{animation:none}}
+#coni .sh{display:none}
+
+/* ---- barre du haut ---- */
+#top{position:absolute;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 12px) 16px 10px;display:flex;align-items:center;gap:10px;z-index:10;pointer-events:none}
+#top>*{pointer-events:auto}
+#top h1{margin:0;font:italic 400 30px/1 var(--serif);color:var(--cacao);text-shadow:0 1px 0 rgba(255,255,255,.8)}
+#top .pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border-radius:999px;padding:7px 12px;font:600 12px/1 var(--sans);color:var(--cacao);box-shadow:0 4px 16px rgba(85,33,30,.12);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+#top .pill.zone{color:var(--rouille)}
+#top .sp{flex:1}
+.icobtn{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 4px 16px rgba(85,33,30,.12);display:grid;place-items:center;color:var(--cacao)}
+.icobtn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---- barre d'outils du sticker sélectionné ---- */
+#tools{position:absolute;display:flex;gap:6px;background:var(--cacao);border-radius:999px;padding:5px;z-index:20;box-shadow:0 10px 30px rgba(59,21,18,.3);transform:translate(-50%,-100%);transition:opacity .2s}
+#tools button{color:#fff;font:600 12px/1 var(--sans);padding:9px 12px;border-radius:999px;display:flex;align-items:center;gap:6px}
+#tools button:active{background:rgba(255,255,255,.14)}
+#tools svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---- tiroir (planche d'autocollants) ---- */
+#drawer{position:absolute;left:0;right:0;bottom:0;z-index:15;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-radius:26px 26px 0 0;box-shadow:0 -10px 40px rgba(85,33,30,.12);padding:0 0 calc(env(safe-area-inset-bottom,0px) + 10px);transition:transform .45s var(--ease)}
+#drawer.hidden-drawer{transform:translateY(calc(100% - 40px))}
+#drawer .handle{height:40px;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;width:100%;touch-action:none}
+#drawer .handle svg{width:18px;height:18px;stroke:var(--rouille);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s var(--ease)}
+#drawer.hidden-drawer .handle svg{transform:rotate(180deg)}
+#drawer .handle i{width:38px;height:4px;border-radius:2px;background:var(--sable-2)}
+#drawer .handle small{font:600 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--taupe)}
+.shelf{display:flex;gap:10px;overflow-x:auto;padding:4px 14px 8px;scrollbar-width:none;touch-action:pan-x}
+.shelf::-webkit-scrollbar{display:none}
+.item{flex:0 0 auto;width:74px;height:74px;border-radius:18px;background:var(--creme);padding:10px;display:grid;place-items:center;touch-action:pan-x;position:relative;overflow:hidden}
+.item .th{width:54px;height:54px;display:block}
+.item .th img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
+.item.locked{background:var(--blush-2)}
+.item.locked .th img{filter:grayscale(1) brightness(0) opacity(.16)}
+.item .ch:empty{display:none}
+.item .ch{position:absolute;top:4px;right:4px;font:600 9px/1 var(--sans);color:#fff;background:var(--rouille);border-radius:999px;padding:4px 6px;letter-spacing:.03em;z-index:1}
+.item.owned .ch{background:var(--cacao)}
+.item.surprise .ch{background:var(--taupe)}
+.empty{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:8px 14px;font:400 13px/1.35 var(--sans);color:var(--taupe);max-width:260px}
+.sec{font:600 10.5px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--taupe);padding:6px 16px 4px;display:flex;justify-content:space-between}
+.sec b{color:var(--rouille);font-weight:600}
+
+/* fantôme pendant le glisser */
+#ghost{position:fixed;left:0;top:0;pointer-events:none;z-index:1000;transform:translate(-50%,-100%);filter:drop-shadow(0 22px 14px rgba(60,30,20,.28));display:none}
+#ghost img{display:block}
+
+/* toast */
+#toast{position:absolute;left:50%;bottom:190px;transform:translate(-50%,20px);background:var(--cacao);color:#fff;font:600 13px/1.3 var(--sans);padding:12px 18px;border-radius:999px;opacity:0;transition:all .35s var(--ease);z-index:30;pointer-events:none;max-width:86%;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+#toast.warn{background:var(--rouille)}
+
+/* ---- panneaux (collection, démo) ---- */
+.sheet{position:absolute;inset:0;z-index:40;background:var(--blanc);display:flex;flex-direction:column;transform:translateY(100%);transition:transform .45s var(--ease)}
+.sheet.on{transform:none}
+.sheet header{display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 14px) 18px 12px}
+.sheet header h2{margin:0;font:italic 400 30px/1 var(--serif);flex:1}
+.sheet .body{flex:1;overflow:auto;padding:0 18px calc(env(safe-area-inset-bottom,0px) + 24px)}
+.sheet p.lead{font:400 14px/1.5 var(--sans);color:var(--taupe);margin:0 0 14px}
+.lv{margin:18px 0 8px;display:flex;align-items:baseline;gap:10px}
+.lv b{font:italic 400 24px/1 var(--serif)}
+.lv span{font:600 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--rouille)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.card{background:var(--creme);border-radius:16px;padding:8px 6px 7px;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;min-width:0}
+.card .th{width:100%;aspect-ratio:1;display:grid;place-items:center}
+.card .th img{max-width:88%;max-height:88%}
+.card.locked .th img{filter:grayscale(1) brightness(0) opacity(.14)}
+.card .nm{font:600 10.5px/1.2 var(--sans);text-align:center;height:26px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;width:100%}
+.card .mt{font:600 9.5px/1 var(--sans);color:var(--taupe);letter-spacing:.04em}
+.card .no{position:absolute;top:5px;left:7px;font:italic 400 13px/1 var(--serif);color:var(--rouille)}
+.card .sz{position:absolute;top:5px;right:7px;font:600 9px/1 var(--sans);color:var(--taupe);border:1px solid var(--sable-2);border-radius:999px;padding:3px 5px}
+.card.placed::after{content:attr(data-n);position:absolute;bottom:34px;right:6px;font:600 8.5px/1 var(--sans);color:#fff;background:var(--sauge-4);border-radius:999px;padding:3px 6px}
+
+.field{margin:16px 0}
+.field label{display:block;font:600 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--taupe);margin-bottom:8px}
+.field input[type=range]{width:100%;accent-color:var(--rouille)}
+.field .val{font:italic 400 40px/1 var(--serif);color:var(--cacao)}
+.field .val small{font:400 14px/1 var(--sans);color:var(--taupe);margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--sable-2);border-radius:999px;padding:8px 12px;font:600 12px/1 var(--sans);display:flex;align-items:center;gap:8px;color:var(--cacao)}
+.chip input{accent-color:var(--rouille);margin:0}
+.chip.on{border-color:var(--cacao);background:var(--blush-2)}
+.seg{display:flex;background:var(--creme);border-radius:999px;padding:4px;gap:2px}
+.seg button{flex:1;padding:9px 0;border-radius:999px;font:600 12px/1 var(--sans);color:var(--taupe)}
+.seg button.on{background:var(--cacao);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:13px 20px;font:600 14px/1 var(--sans);background:var(--cacao);color:#fff}
+.btn.ghost{background:transparent;color:var(--rouille);border:1.5px solid var(--blush)}
+.note{background:var(--peche);border-radius:18px;padding:14px 16px;font:400 13px/1.5 var(--sans);color:var(--cacao);margin-top:18px}
+.note b{font-weight:600}
+</style>
+
+</head><body>
+<div id="app">
+  <div id="viewport">
+    <div id="world">
+      <div id="tiles"></div>
+      <div id="seams"></div>
+      <div id="stickers"></div>
+      <div id="coni" class="flip"><div class="bulle"></div><div class="body"><img data-pose="profil" src="coni/03-profil.svg" alt=""><img data-pose="dodo" src="coni/08-dodo.svg" alt=""><img data-pose="assis" src="coni/09-pattes-jointes.svg" alt=""><img data-pose="joie" src="coni/05-joie.svg" alt=""><img data-pose="surprise" src="coni/11-surprise.svg" alt=""><img data-pose="mv01" src="coni/mv01.webp" alt=""><img data-pose="mv02" src="coni/mv02.webp" alt=""><img data-pose="mv03" src="coni/mv03.webp" alt=""><img data-pose="mv05" src="coni/mv05.webp" alt=""><img data-pose="mv06" src="coni/mv06.webp" alt=""><img data-pose="mv07" src="coni/mv07.webp" alt=""><img data-pose="mv08" src="coni/mv08.webp" alt=""><img data-pose="mv09" src="coni/mv09.webp" alt=""><img data-pose="mv10" src="coni/mv10.webp" alt=""><img data-pose="mv11" src="coni/mv11.webp" alt=""><img data-pose="mv12" src="coni/mv12.webp" alt=""></div></div>
+      <div id="sky"></div>
+    </div>
+  </div>
+
+  <div id="top">
+    <button class="icobtn" id="btnRetour" aria-label="Retour"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <h1>Ton jardin</h1>
+    <span class="pill zone" id="zonePill">Fontaine</span>
+    <span class="sp"></span>
+    <button class="icobtn" id="btnCollection" aria-label="Collection"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg></button>
+  </div>
+
+  <div id="tools" hidden>
+    <button id="tFlip"><svg viewBox="0 0 24 24"><path d="M12 3v18M8 7 4 12l4 5M16 7l4 5-4 5"/></svg>Miroir</button>
+    <button id="tStore"><svg viewBox="0 0 24 24"><path d="M4 8h16M6 8v11a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V8M9 8V5h6v3"/></svg>Ranger</button>
+  </div>
+
+  <div id="drawer">
+    <button class="handle" id="handle" aria-label="Réduire ou ouvrir la planche"><i></i><svg viewBox="0 0 24 24"><path d="M6 10l6 6 6-6"/></svg><i></i></button>
+    <div class="sec"><span>Mes stickers · touche ou glisse</span><b id="cntOwned"></b></div>
+    <div class="shelf" id="shelfOwned"></div>
+    <div class="sec"><span>À débloquer</span><b id="cntLocked"></b></div>
+    <div class="shelf" id="shelfLocked"></div>
+  </div>
+
+  <div id="ghost"><img alt=""></div>
+  <div id="toast"></div>
+
+  <section class="sheet" id="sheetCollection">
+    <header><h2>Collection</h2><button class="icobtn" data-close aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="body">
+      <p class="lead">Un élément par chapitre accompli. Les chiffres rouille sont les numéros de chapitre ; P / M / G la taille dans le jardin. Les six derniers sont des surprises liées aux badges.</p>
+      <div id="collection"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA = {"stickers": [{"id": 1, "slug": "panier-agrumes", "name": "Panier d'agrumes", "size": "P", "zone": 4, "cat": "sol", "file": "01-panier-agrumes.webp", "w": 400, "h": 357, "chapter": 9, "level": "A1.2"}, {"id": 2, "slug": "arrosoir", "name": "Arrosoir", "size": "P", "zone": 3, "cat": "sol", "file": "02-arrosoir.webp", "w": 400, "h": 320, "chapter": 45, "level": "B1.2"}, {"id": 3, "slug": "lanterne-socle", "name": "Lanterne sur socle", "size": "M", "zone": 2, "cat": "sol", "file": "03-lanterne-socle.webp", "w": 351, "h": 400, "chapter": 4, "level": "A1.1"}, {"id": 4, "slug": "fauteuil", "name": "Fauteuil de jardin", "size": "M", "zone": 2, "cat": "sol", "file": "04-fauteuil.webp", "w": 387, "h": 400, "chapter": 5, "level": "A1.1"}, {"id": 5, "slug": "arche-fleurie", "name": "Arche fleurie en pierre", "size": "G", "zone": 6, "cat": "sol", "file": "05-arche-fleurie.webp", "w": 387, "h": 400, "chapter": 64, "level": "B2.1"}, {"id": 6, "slug": "mangeoire", "name": "Mangeoire à oiseaux", "size": "M", "zone": 1, "cat": "sol", "file": "06-mangeoire.webp", "w": 246, "h": 400, "chapter": 39, "level": "B1.1"}, {"id": 7, "slug": "moineau", "name": "Moineau", "size": "P", "zone": 1, "cat": "sol", "file": "07-moineau.webp", "w": 400, "h": 391, "chapter": 35, "level": "B1.1"}, {"id": 8, "slug": "lapin", "name": "Lapin", "size": "P", "zone": 4, "cat": "sol", "file": "08-lapin.webp", "w": 307, "h": 400, "surprise": "Cousin de Coni · 7 jours de série"}, {"id": 9, "slug": "grenouille", "name": "Grenouille sur nénuphar", "size": "P", "zone": 8, "cat": "eau", "file": "09-grenouille.webp", "w": 400, "h": 285, "chapter": 26, "level": "A2.2"}, {"id": 10, "slug": "colonne", "name": "Colonne antique", "size": "M", "zone": 9, "cat": "sol", "file": "10-colonne.webp", "w": 227, "h": 400, "chapter": 68, "level": "B2.2"}, {"id": 11, "slug": "brouette-fleurie", "name": "Brouette fleurie", "size": "M", "zone": 3, "cat": "sol", "file": "11-brouette-fleurie.webp", "w": 400, "h": 371, "chapter": 51, "level": "B1.2"}, {"id": 12, "slug": "banc-fer-forge", "name": "Banc en fer forgé", "size": "M", "zone": 1, "cat": "sol", "file": "12-banc-fer-forge.webp", "w": 400, "h": 356, "chapter": 40, "level": "B1.1"}, {"id": 13, "slug": "vasque-oiseaux", "name": "Vasque à oiseaux", "size": "M", "zone": 6, "cat": "sol", "file": "13-vasque-oiseaux.webp", "w": 320, "h": 400, "chapter": 25, "level": "A2.1"}, {"id": 14, "slug": "nichoir", "name": "Nichoir sur pied", "size": "M", "zone": 1, "cat": "sol", "file": "14-nichoir.webp", "w": 273, "h": 400, "chapter": 41, "level": "B1.1"}, {"id": 15, "slug": "cadran-solaire", "name": "Cadran solaire", "size": "M", "zone": 9, "cat": "sol", "file": "15-cadran-solaire.webp", "w": 280, "h": 400, "chapter": 69, "level": "B2.2"}, {"id": 16, "slug": "pots-aromatiques", "name": "Pots d'aromatiques", "size": "P", "zone": 7, "cat": "sol", "file": "16-pots-aromatiques.webp", "w": 369, "h": 400, "chapter": 55, "level": "B2.1"}, {"id": 17, "slug": "papillon", "name": "Papillon", "size": "P", "zone": 6, "cat": "air", "file": "17-papillon.webp", "w": 400, "h": 328, "chapter": 17, "level": "A2.1"}, {"id": 18, "slug": "chapeau-gants", "name": "Chapeau et gants", "size": "P", "zone": 7, "cat": "sol", "file": "18-chapeau-gants.webp", "w": 400, "h": 332, "chapter": 56, "level": "B2.1"}, {"id": 19, "slug": "table-pique-nique", "name": "Table de pique-nique", "size": "G", "zone": 1, "cat": "sol", "file": "19-table-pique-nique.webp", "w": 400, "h": 338, "chapter": 43, "level": "B1.1"}, {"id": 20, "slug": "chaise-longue", "name": "Chaise longue", "size": "M", "zone": 2, "cat": "sol", "file": "20-chaise-longue.webp", "w": 400, "h": 313, "chapter": 6, "level": "A1.1"}, {"id": 21, "slug": "balancelle", "name": "Balancelle fleurie", "size": "G", "zone": 1, "cat": "sol", "file": "21-balancelle.webp", "w": 400, "h": 394, "chapter": 44, "level": "B1.1"}, {"id": 22, "slug": "table-bistrot", "name": "Table et chaises bistrot", "size": "M", "zone": 2, "cat": "sol", "file": "22-table-bistrot.webp", "w": 400, "h": 337, "chapter": 7, "level": "A1.1"}, {"id": 23, "slug": "parasol", "name": "Parasol", "size": "G", "zone": 2, "cat": "sol", "file": "23-parasol.webp", "w": 397, "h": 400, "chapter": 73, "level": "B2.2"}, {"id": 24, "slug": "pot-roses", "name": "Pot de roses", "size": "P", "zone": 6, "cat": "sol", "file": "24-pot-roses.webp", "w": 399, "h": 400, "chapter": 18, "level": "A2.1"}, {"id": 25, "slug": "bouquet-arrosoir", "name": "Bouquet dans l'arrosoir", "size": "P", "zone": 6, "cat": "sol", "file": "25-bouquet-arrosoir.webp", "w": 397, "h": 400, "chapter": 19, "level": "A2.1"}, {"id": 26, "slug": "hortensias", "name": "Hortensias en pot", "size": "P", "zone": 6, "cat": "sol", "file": "26-hortensias.webp", "w": 400, "h": 400, "chapter": 20, "level": "A2.1"}, {"id": 27, "slug": "treillis-roses", "name": "Treillis aux roses", "size": "M", "zone": 6, "cat": "sol", "file": "27-treillis-roses.webp", "w": 329, "h": 400, "chapter": 11, "level": "A1.2"}, {"id": 28, "slug": "caisse-fleurie", "name": "Caisse fleurie", "size": "P", "zone": 6, "cat": "sol", "file": "28-caisse-fleurie.webp", "w": 400, "h": 372, "chapter": 21, "level": "A2.1"}, {"id": 29, "slug": "balancoire", "name": "Balançoire", "size": "M", "zone": 1, "cat": "sol", "file": "29-balancoire.webp", "w": 365, "h": 400, "chapter": 42, "level": "B1.1"}, {"id": 30, "slug": "lezard", "name": "Lézard sur sa pierre", "size": "P", "zone": 9, "cat": "sol", "file": "30-lezard.webp", "w": 379, "h": 400, "chapter": 65, "level": "B2.2"}, {"id": 31, "slug": "coccinelle", "name": "Coccinelle sur marguerite", "size": "P", "zone": 6, "cat": "sol", "file": "31-coccinelle.webp", "w": 400, "h": 374, "chapter": 22, "level": "A2.1"}, {"id": 32, "slug": "abeille", "name": "Abeille", "size": "P", "zone": 6, "cat": "air", "file": "32-abeille.webp", "w": 385, "h": 400, "chapter": 23, "level": "A2.1"}, {"id": 33, "slug": "gueridon", "name": "Guéridon", "size": "P", "zone": 2, "cat": "sol", "file": "33-gueridon.webp", "w": 290, "h": 400, "chapter": 1, "level": "A1.1"}, {"id": 34, "slug": "chaise-toile", "name": "Chaise en toile", "size": "M", "zone": 2, "cat": "sol", "file": "34-chaise-toile.webp", "w": 373, "h": 400, "chapter": 8, "level": "A1.1"}, {"id": 35, "slug": "piedestal", "name": "Piédestal en pierre", "size": "P", "zone": 9, "cat": "sol", "file": "35-piedestal.webp", "w": 340, "h": 400, "chapter": 66, "level": "B2.2"}, {"id": 36, "slug": "pile-de-pots", "name": "Pile de pots", "size": "P", "zone": 7, "cat": "sol", "file": "36-pile-de-pots.webp", "w": 272, "h": 400, "chapter": 57, "level": "B2.1"}, {"id": 37, "slug": "outils", "name": "Outils de jardin", "size": "P", "zone": 3, "cat": "sol", "file": "37-outils.webp", "w": 400, "h": 383, "chapter": 46, "level": "B1.2"}, {"id": 38, "slug": "lampadaire", "name": "Lampadaire", "size": "M", "zone": 2, "cat": "sol", "file": "38-lampadaire.webp", "w": 159, "h": 400, "chapter": 12, "level": "A1.2"}, {"id": 39, "slug": "lavande-pot", "name": "Lavande en pot", "size": "P", "zone": 7, "cat": "sol", "file": "39-lavande-pot.webp", "w": 316, "h": 400, "chapter": 58, "level": "B2.1"}, {"id": 40, "slug": "iris", "name": "Iris", "size": "P", "zone": 8, "cat": "sol", "file": "40-iris.webp", "w": 358, "h": 400, "chapter": 27, "level": "A2.2"}, {"id": 41, "slug": "mesange", "name": "Mésange bleue", "size": "P", "zone": 1, "cat": "sol", "file": "41-mesange.webp", "w": 327, "h": 400, "chapter": 36, "level": "B1.1"}, {"id": 42, "slug": "libellule", "name": "Libellule", "size": "P", "zone": 8, "cat": "air", "file": "42-libellule.webp", "w": 400, "h": 373, "chapter": 28, "level": "A2.2"}, {"id": 43, "slug": "arche-pierre", "name": "Arche de pierre", "size": "G", "zone": 9, "cat": "sol", "file": "43-arche-pierre.webp", "w": 379, "h": 400, "chapter": 74, "level": "B2.2"}, {"id": 44, "slug": "aigrette", "name": "Aigrette", "size": "M", "zone": 8, "cat": "sol", "file": "44-aigrette.webp", "w": 309, "h": 400, "chapter": 31, "level": "A2.2"}, {"id": 45, "slug": "pergola-bois", "name": "Arche en bois", "size": "G", "zone": 4, "cat": "sol", "file": "45-pergola-bois.webp", "w": 365, "h": 400, "chapter": 15, "level": "A1.2"}, {"id": 46, "slug": "table-rempotage", "name": "Table de rempotage", "size": "M", "zone": 7, "cat": "sol", "file": "46-table-rempotage.webp", "w": 357, "h": 400, "chapter": 63, "level": "B2.1"}, {"id": 47, "slug": "hamac", "name": "Hamac sur pied", "size": "G", "zone": 4, "cat": "sol", "file": "47-hamac.webp", "w": 400, "h": 321, "chapter": 16, "level": "A1.2"}, {"id": 48, "slug": "fontaine-murale", "name": "Fontaine murale", "size": "M", "zone": 5, "cat": "sol", "file": "48-fontaine-murale.webp", "w": 259, "h": 400, "chapter": 32, "level": "A2.2"}, {"id": 49, "slug": "table-mosaique", "name": "Table mosaïque", "size": "M", "zone": 9, "cat": "sol", "file": "49-table-mosaique.webp", "w": 371, "h": 400, "chapter": 70, "level": "B2.2"}, {"id": 50, "slug": "jarre", "name": "Jarre en terre cuite", "size": "M", "zone": 9, "cat": "sol", "file": "50-jarre.webp", "w": 331, "h": 400, "chapter": 71, "level": "B2.2"}, {"id": 51, "slug": "pavots", "name": "Pavots", "size": "P", "zone": 6, "cat": "sol", "file": "51-pavots.webp", "w": 346, "h": 400, "chapter": 24, "level": "A2.1"}, {"id": 52, "slug": "geraniums", "name": "Jardinière de géraniums", "size": "P", "zone": 2, "cat": "sol", "file": "52-geraniums.webp", "w": 400, "h": 352, "chapter": 2, "level": "A1.1"}, {"id": 55, "slug": "buis-boule", "name": "Buis en boule", "size": "M", "zone": 5, "cat": "sol", "file": "55-buis-boule.webp", "w": 277, "h": 400, "chapter": 33, "level": "A2.2"}, {"id": 56, "slug": "panier-olives", "name": "Panier d'olives", "size": "P", "zone": 9, "cat": "sol", "file": "56-panier-olives.webp", "w": 400, "h": 328, "chapter": 67, "level": "B2.2"}, {"id": 57, "slug": "cloche", "name": "Cloche de jardin", "size": "P", "zone": 7, "cat": "sol", "file": "57-cloche.webp", "w": 384, "h": 400, "chapter": 59, "level": "B2.1"}, {"id": 58, "slug": "tuyau", "name": "Tuyau d'arrosage", "size": "P", "zone": 3, "cat": "sol", "file": "58-tuyau.webp", "w": 400, "h": 374, "chapter": 47, "level": "B1.2"}, {"id": 59, "slug": "echelle", "name": "Échelle", "size": "M", "zone": 4, "cat": "sol", "file": "59-echelle.webp", "w": 334, "h": 400, "chapter": 13, "level": "A1.2"}, {"id": 60, "slug": "bottes-fleuries", "name": "Bottes fleuries", "size": "P", "zone": 7, "cat": "sol", "file": "60-bottes-fleuries.webp", "w": 355, "h": 400, "chapter": 60, "level": "B2.1"}, {"id": 61, "slug": "carillon", "name": "Carillon", "size": "P", "zone": 2, "cat": "perche", "file": "61-carillon.webp", "w": 201, "h": 400, "chapter": 3, "level": "A1.1"}, {"id": 62, "slug": "pas-japonais", "name": "Pas japonais", "size": "P", "zone": 1, "cat": "sol", "file": "62-pas-japonais.webp", "w": 400, "h": 312, "chapter": 37, "level": "B1.1"}, {"id": 63, "slug": "obelisque", "name": "Obélisque treillis", "size": "M", "zone": 6, "cat": "sol", "file": "63-obelisque.webp", "w": 157, "h": 400, "chapter": 52, "level": "B1.2"}, {"id": 64, "slug": "romarin-pot", "name": "Romarin en pot", "size": "P", "zone": 7, "cat": "sol", "file": "64-romarin-pot.webp", "w": 333, "h": 400, "chapter": 61, "level": "B2.1"}, {"id": 65, "slug": "tonneau", "name": "Tonneau récupérateur", "size": "M", "zone": 3, "cat": "sol", "file": "65-tonneau.webp", "w": 325, "h": 400, "chapter": 53, "level": "B1.2"}, {"id": 66, "slug": "puits", "name": "Puits", "size": "G", "zone": 3, "cat": "sol", "file": "66-puits.webp", "w": 369, "h": 400, "chapter": 54, "level": "B1.2"}, {"id": 67, "slug": "semis", "name": "Caisse de semis", "size": "P", "zone": 3, "cat": "sol", "file": "67-semis.webp", "w": 400, "h": 341, "chapter": 48, "level": "B1.2"}, {"id": 68, "slug": "gants-ficelle", "name": "Gants et ficelle", "size": "P", "zone": 3, "cat": "sol", "file": "68-gants-ficelle.webp", "w": 400, "h": 327, "chapter": 49, "level": "B1.2"}, {"id": 69, "slug": "panier-graines", "name": "Panier de graines", "size": "P", "zone": 3, "cat": "sol", "file": "69-panier-graines.webp", "w": 400, "h": 363, "chapter": 50, "level": "B1.2"}, {"id": 70, "slug": "pont", "name": "Petit pont", "size": "G", "zone": 8, "cat": "sol", "file": "70-pont.webp", "w": 400, "h": 299, "chapter": 34, "level": "A2.2"}, {"id": 71, "slug": "cage-suspendue", "name": "Cage à plantes suspendue", "size": "P", "zone": 7, "cat": "perche", "file": "71-cage-suspendue.webp", "w": 250, "h": 400, "chapter": 62, "level": "B2.1"}, {"id": 72, "slug": "chapeau-paille", "name": "Chapeau de paille", "size": "P", "zone": 4, "cat": "sol", "file": "72-chapeau-paille.webp", "w": 400, "h": 301, "chapter": 10, "level": "A1.2"}, {"id": 73, "slug": "citronnier-pot", "name": "Citronnier en pot", "size": "M", "zone": 4, "cat": "sol", "file": "73-citronnier-pot.webp", "w": 280, "h": 400, "chapter": 14, "level": "A1.2"}, {"id": 74, "slug": "banquette", "name": "Banquette", "size": "M", "zone": 9, "cat": "sol", "file": "74-banquette.webp", "w": 400, "h": 321, "chapter": 72, "level": "B2.2"}, {"id": 75, "slug": "herisson", "name": "Hérisson", "size": "P", "zone": 1, "cat": "sol", "file": "75-herisson.webp", "w": 400, "h": 389, "surprise": "Hérisson · 100 jours de série"}, {"id": 76, "slug": "colombe", "name": "Colombe", "size": "P", "zone": 5, "cat": "air", "file": "76-colombe.webp", "w": 332, "h": 400, "surprise": "Colombe · premier bilan sans faute"}, {"id": 77, "slug": "ecureuil", "name": "Écureuil", "size": "P", "zone": 4, "cat": "sol", "file": "77-ecureuil.webp", "w": 386, "h": 400, "surprise": "Écureuil · 100 mots connus"}, {"id": 78, "slug": "tortue", "name": "Tortue", "size": "P", "zone": 9, "cat": "sol", "file": "78-tortue.webp", "w": 400, "h": 317, "surprise": "Tortue · 1 000 minutes"}, {"id": 79, "slug": "hirondelles", "name": "Hirondelles", "size": "P", "zone": 8, "cat": "perche", "file": "79-hirondelles.webp", "w": 400, "h": 373, "chapter": 29, "level": "A2.2"}, {"id": 80, "slug": "rouge-gorge", "name": "Rouge-gorge", "size": "P", "zone": 1, "cat": "sol", "file": "80-rouge-gorge.webp", "w": 353, "h": 400, "chapter": 38, "level": "B1.1"}, {"id": 81, "slug": "escargot", "name": "Escargot", "size": "P", "zone": 8, "cat": "sol", "file": "81-escargot.webp", "w": 400, "h": 379, "chapter": 30, "level": "A2.2"}, {"id": 82, "slug": "chat", "name": "Chat endormi", "size": "P", "zone": 9, "cat": "sol", "file": "82-chat.webp", "w": 400, "h": 293, "surprise": "Chat · 30 jours de série"}], "zones": {"1": "grand-arbre", "2": "terrasse", "3": "potager", "4": "agrumier", "5": "fontaine", "6": "massifs", "7": "serre", "8": "bassin", "9": "olivier"}};
+const ASSETS = {"stickers/01-panier-agrumes.webp": "stickers/01-panier-agrumes.webp", "stickers/02-arrosoir.webp": "stickers/02-arrosoir.webp", "stickers/03-lanterne-socle.webp": "stickers/03-lanterne-socle.webp", "stickers/04-fauteuil.webp": "stickers/04-fauteuil.webp", "stickers/05-arche-fleurie.webp": "stickers/05-arche-fleurie.webp", "stickers/06-mangeoire.webp": "stickers/06-mangeoire.webp", "stickers/07-moineau.webp": "stickers/07-moineau.webp", "stickers/08-lapin.webp": "stickers/08-lapin.webp", "stickers/09-grenouille.webp": "stickers/09-grenouille.webp", "stickers/10-colonne.webp": "stickers/10-colonne.webp", "stickers/11-brouette-fleurie.webp": "stickers/11-brouette-fleurie.webp", "stickers/12-banc-fer-forge.webp": "stickers/12-banc-fer-forge.webp", "stickers/13-vasque-oiseaux.webp": "stickers/13-vasque-oiseaux.webp", "stickers/14-nichoir.webp": "stickers/14-nichoir.webp", "stickers/15-cadran-solaire.webp": "stickers/15-cadran-solaire.webp", "stickers/16-pots-aromatiques.webp": "stickers/16-pots-aromatiques.webp", "stickers/17-papillon.webp": "stickers/17-papillon.webp", "stickers/18-chapeau-gants.webp": "stickers/18-chapeau-gants.webp", "stickers/19-table-pique-nique.webp": "stickers/19-table-pique-nique.webp", "stickers/20-chaise-longue.webp": "stickers/20-chaise-longue.webp", "stickers/21-balancelle.webp": "stickers/21-balancelle.webp", "stickers/22-table-bistrot.webp": "stickers/22-table-bistrot.webp", "stickers/23-parasol.webp": "stickers/23-parasol.webp", "stickers/24-pot-roses.webp": "stickers/24-pot-roses.webp", "stickers/25-bouquet-arrosoir.webp": "stickers/25-bouquet-arrosoir.webp", "stickers/26-hortensias.webp": "stickers/26-hortensias.webp", "stickers/27-treillis-roses.webp": "stickers/27-treillis-roses.webp", "stickers/28-caisse-fleurie.webp": "stickers/28-caisse-fleurie.webp", "stickers/29-balancoire.webp": "stickers/29-balancoire.webp", "stickers/30-lezard.webp": "stickers/30-lezard.webp", "stickers/31-coccinelle.webp": "stickers/31-coccinelle.webp", "stickers/32-abeille.webp": "stickers/32-abeille.webp", "stickers/33-gueridon.webp": "stickers/33-gueridon.webp", "stickers/34-chaise-toile.webp": "stickers/34-chaise-toile.webp", "stickers/35-piedestal.webp": "stickers/35-piedestal.webp", "stickers/36-pile-de-pots.webp": "stickers/36-pile-de-pots.webp", "stickers/37-outils.webp": "stickers/37-outils.webp", "stickers/38-lampadaire.webp": "stickers/38-lampadaire.webp", "stickers/39-lavande-pot.webp": "stickers/39-lavande-pot.webp", "stickers/40-iris.webp": "stickers/40-iris.webp", "stickers/41-mesange.webp": "stickers/41-mesange.webp", "stickers/42-libellule.webp": "stickers/42-libellule.webp", "stickers/43-arche-pierre.webp": "stickers/43-arche-pierre.webp", "stickers/44-aigrette.webp": "stickers/44-aigrette.webp", "stickers/45-pergola-bois.webp": "stickers/45-pergola-bois.webp", "stickers/46-table-rempotage.webp": "stickers/46-table-rempotage.webp", "stickers/47-hamac.webp": "stickers/47-hamac.webp", "stickers/48-fontaine-murale.webp": "stickers/48-fontaine-murale.webp", "stickers/49-table-mosaique.webp": "stickers/49-table-mosaique.webp", "stickers/50-jarre.webp": "stickers/50-jarre.webp", "stickers/51-pavots.webp": "stickers/51-pavots.webp", "stickers/52-geraniums.webp": "stickers/52-geraniums.webp", "stickers/55-buis-boule.webp": "stickers/55-buis-boule.webp", "stickers/56-panier-olives.webp": "stickers/56-panier-olives.webp", "stickers/57-cloche.webp": "stickers/57-cloche.webp", "stickers/58-tuyau.webp": "stickers/58-tuyau.webp", "stickers/59-echelle.webp": "stickers/59-echelle.webp", "stickers/60-bottes-fleuries.webp": "stickers/60-bottes-fleuries.webp", "stickers/61-carillon.webp": "stickers/61-carillon.webp", "stickers/62-pas-japonais.webp": "stickers/62-pas-japonais.webp", "stickers/63-obelisque.webp": "stickers/63-obelisque.webp", "stickers/64-romarin-pot.webp": "stickers/64-romarin-pot.webp", "stickers/65-tonneau.webp": "stickers/65-tonneau.webp", "stickers/66-puits.webp": "stickers/66-puits.webp", "stickers/67-semis.webp": "stickers/67-semis.webp", "stickers/68-gants-ficelle.webp": "stickers/68-gants-ficelle.webp", "stickers/69-panier-graines.webp": "stickers/69-panier-graines.webp", "stickers/70-pont.webp": "stickers/70-pont.webp", "stickers/71-cage-suspendue.webp": "stickers/71-cage-suspendue.webp", "stickers/72-chapeau-paille.webp": "stickers/72-chapeau-paille.webp", "stickers/73-citronnier-pot.webp": "stickers/73-citronnier-pot.webp", "stickers/74-banquette.webp": "stickers/74-banquette.webp", "stickers/75-herisson.webp": "stickers/75-herisson.webp", "stickers/76-colombe.webp": "stickers/76-colombe.webp", "stickers/77-ecureuil.webp": "stickers/77-ecureuil.webp", "stickers/78-tortue.webp": "stickers/78-tortue.webp", "stickers/79-hirondelles.webp": "stickers/79-hirondelles.webp", "stickers/80-rouge-gorge.webp": "stickers/80-rouge-gorge.webp", "stickers/81-escargot.webp": "stickers/81-escargot.webp", "stickers/82-chat.webp": "stickers/82-chat.webp", "zones/z1-grand-arbre.webp": "zones/z1-grand-arbre.webp", "zones/z2-terrasse.webp": "zones/z2-terrasse.webp", "zones/z3-potager.webp": "zones/z3-potager.webp", "zones/z4-agrumier.webp": "zones/z4-agrumier.webp", "zones/z5-fontaine.webp": "zones/z5-fontaine.webp", "zones/z6-massifs.webp": "zones/z6-massifs.webp", "zones/z7-serre.webp": "zones/z7-serre.webp", "zones/z8-bassin.webp": "zones/z8-bassin.webp", "zones/z9-olivier.webp": "zones/z9-olivier.webp"};
+const GRID = {
+ "size": 4096,
+ "xs": [
+  0,
+  1470,
+  2638,
+  4096
+ ],
+ "ys": [
+  0,
+  1384,
+  2478,
+  4096
+ ],
+ "zones": {
+  "1": {
+   "x": 0,
+   "y": 0,
+   "w": 1470,
+   "h": 1384
+  },
+  "2": {
+   "x": 1470,
+   "y": 0,
+   "w": 1168,
+   "h": 1384
+  },
+  "3": {
+   "x": 2638,
+   "y": 0,
+   "w": 1458,
+   "h": 1384
+  },
+  "4": {
+   "x": 0,
+   "y": 1384,
+   "w": 1470,
+   "h": 1094
+  },
+  "5": {
+   "x": 1470,
+   "y": 1384,
+   "w": 1168,
+   "h": 1094
+  },
+  "6": {
+   "x": 2638,
+   "y": 1384,
+   "w": 1458,
+   "h": 1094
+  },
+  "7": {
+   "x": 0,
+   "y": 2478,
+   "w": 1470,
+   "h": 1618
+  },
+  "8": {
+   "x": 1470,
+   "y": 2478,
+   "w": 1168,
+   "h": 1618
+  },
+  "9": {
+   "x": 2638,
+   "y": 2478,
+   "w": 1458,
+   "h": 1618
+  }
+ }
+};
+const W = GRID.size, N = 3, TILE = W / 3;
+const SIZES = { P: 184, M: 287, G: 427 };
+const ZONES = [
+  { id: 1, slug: 'grand-arbre', name: 'Grand arbre', r: 0, c: 0, opens: 'B1.1' },
+  { id: 2, slug: 'terrasse', name: 'Terrasse', r: 0, c: 1, opens: null },
+  { id: 3, slug: 'potager', name: 'Potager', r: 0, c: 2, opens: 'B1.2' },
+  { id: 4, slug: 'agrumier', name: 'Agrumier', r: 1, c: 0, opens: 'A1.2' },
+  { id: 5, slug: 'fontaine', name: 'Fontaine', r: 1, c: 1, opens: null },
+  { id: 6, slug: 'massifs', name: 'Massifs fleuris', r: 1, c: 2, opens: 'A2.1' },
+  { id: 7, slug: 'serre', name: 'Serre', r: 2, c: 0, opens: 'B2.1' },
+  { id: 8, slug: 'bassin', name: 'Bassin', r: 2, c: 1, opens: 'A2.2' },
+  { id: 9, slug: 'olivier', name: 'Olivier', r: 2, c: 2, opens: 'B2.2' },
+];
+const LEVELS = ['A1.1', 'A1.2', 'A2.1', 'A2.2', 'B1.1', 'B1.2', 'B2.1', 'B2.2'];
+const LEVEL_END = { 'A1.1': 8, 'A1.2': 16, 'A2.1': 25, 'A2.2': 34, 'B1.1': 44, 'B1.2': 54, 'B2.1': 64, 'B2.2': 74 };
+// places suggérées (fraction de la parcelle, pied de l'élément)
+const SPOTS = {
+  1: [[.55,.55],[.75,.45],[.35,.7],[.6,.75],[.82,.66],[.25,.86],[.5,.42],[.9,.85],[.15,.5],[.7,.9]],
+  2: [[.3,.5],[.5,.46],[.7,.56],[.4,.66],[.62,.7],[.25,.82],[.75,.82],[.5,.86],[.18,.62],[.84,.62]],
+  3: [[.15,.55],[.85,.7],[.5,.86],[.2,.8],[.85,.4],[.35,.92],[.7,.92],[.1,.35],[.92,.88],[.5,.12]],
+  4: [[.65,.45],[.8,.6],[.55,.72],[.75,.84],[.4,.86],[.9,.4],[.6,.32],[.88,.78],[.3,.62],[.5,.94]],
+  5: [[.2,.3],[.8,.3],[.2,.75],[.8,.75],[.32,.9],[.68,.9],[.13,.5],[.87,.5],[.5,.12],[.5,.95]],
+  6: [[.45,.4],[.35,.6],[.55,.66],[.3,.8],[.6,.86],[.45,.24],[.2,.4],[.7,.3],[.15,.66],[.42,.94]],
+  7: [[.8,.4],[.85,.6],[.6,.86],[.3,.86],[.15,.4],[.75,.82],[.5,.22],[.9,.9],[.1,.7],[.45,.95]],
+  8: [[.15,.25],[.85,.2],[.15,.78],[.5,.92],[.85,.9],[.3,.12],[.7,.1],[.08,.55],[.92,.55],[.35,.96]],
+  9: [[.3,.4],[.25,.65],[.5,.82],[.8,.86],[.7,.35],[.15,.86],[.45,.2],[.9,.65],[.6,.6],[.85,.25]],
+};
+const WATER = [[.45,.5],[.35,.6],[.55,.42],[.4,.38],[.52,.62]];
+const SEATS = new Set([4, 12, 19, 20, 21, 34, 74]);
+
+const stickers = DATA.stickers;
+const byId = Object.fromEntries(stickers.map(s => [s.id, s]));
+for (const z of ZONES) Object.assign(z, GRID.zones[z.id]);
+const zoneById = Object.fromEntries(ZONES.map(z => [z.id, z]));
+
+// ---------- état ----------
+const KEY = 'italingo-jardin-v3';
+let uidSeq = 1; const newUid = () => 'u' + Date.now().toString(36) + (uidSeq++).toString(36);
+// Pont avec Italingo : dans l'app, la progression vient de l'app et le jardin est enregistré dans
+// l'objet d'état de l'app (donc dans le fichier de sauvegarde). Seule, la page garde son propre stockage.
+const APP = (() => { try { return window.parent && window.parent !== window && window.parent.Store ? window.parent : null; } catch (e) { return null; } })();
+const SURPRISE_BADGES = { 'serie-7': 8, 'serie-30': 82, 'bilan-sans-faute': 76, 'serie-100': 75, 'minutes-1000': 78, 'mots-100': 77 };
+let state = { chapters: 0, surprises: [], placed: [], light: 'auto', drawerOpen: true };
+if (APP) {
+  const e = APP.Store.get();
+  let n = 0; while (e.progression.chapitres[n + 1] && e.progression.chapitres[n + 1].termine) n++;
+  const j = e.acquis.jardin || {};
+  state.chapters = n;
+  state.surprises = (e.acquis.badges || []).map(b => SURPRISE_BADGES[b.id || b]).filter(Boolean);
+  state.placed = Array.isArray(j.placed) ? j.placed : [];
+  state.seen = Array.isArray(j.seen) ? j.seen : [];
+  state.drawerOpen = j.drawerOpen !== false;
+} else {
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.placed) state = Object.assign(state, s); } catch (e) { }
+}
+function save() {
+  if (APP) { APP.Store.modifier(e => { e.acquis.jardin = Object.assign({}, e.acquis.jardin, { placed: state.placed, seen: state.seen || [], drawerOpen: state.drawerOpen }); }); }
+  else { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { } }
+}
+document.getElementById('btnRetour').onclick = () => { if (APP) APP.postMessage({ type: 'jardin:fermer' }, '*'); else history.back(); };
+
+function levelOf(ch) { for (const l of LEVELS) if (ch < LEVEL_END[l]) return l; return 'B2.2'; }
+function levelIndex(l) { return LEVELS.indexOf(l); }
+function zoneUnlocked(z) { if (!z.opens) return true; return levelIndex(levelOf(state.chapters)) >= levelIndex(z.opens); }
+function owned(s) { return s.chapter ? s.chapter <= state.chapters : state.surprises.includes(s.id); }
+function countPlaced(id) { return state.placed.filter(p => p.id === id).length; }
+function isPlaced(id) { return countPlaced(id) > 0; }
+
+// ---------- carte ----------
+const vp = document.getElementById('viewport'), world = document.getElementById('world');
+let view = { x: 0, y: 0, s: .38 };
+function applyView() { world.style.transform = `translate(${view.x}px,${view.y}px) scale(${view.s})`; updateZonePill(); }
+function clampView() {
+  const vw = vp.clientWidth, vh = vp.clientHeight;
+  const minS = Math.max(vw, vh) / W * 0.6;
+  view.s = Math.min(1.1, Math.max(minS, view.s));
+  const ws = W * view.s;
+  const pad = 80;
+  view.x = Math.min(pad, Math.max(vw - ws - pad, view.x));
+  view.y = Math.min(pad, Math.max(vh - ws - pad, view.y));
+}
+function centerOn(zoneId, scale) {
+  const z = zoneById[zoneId];
+  const vw = vp.clientWidth, vh = vp.clientHeight;
+  view.s = scale || Math.min(vw / z.w, (vh - 150) / z.h) * 0.98;
+  view.x = vw / 2 - (z.x + z.w / 2) * view.s;
+  view.y = (vh - 150) / 2 - (z.y + z.h / 2) * view.s;
+  clampView(); applyView();
+}
+function toWorld(cx, cy) { const r = vp.getBoundingClientRect(); return { x: (cx - r.left - view.x) / view.s, y: (cy - r.top - view.y) / view.s }; }
+function zoneAt(wx, wy) { return ZONES.find(z => wx >= z.x && wx < z.x + z.w && wy >= z.y && wy < z.y + z.h) || null; }
+function updateZonePill() {
+  const vw = vp.clientWidth, vh = vp.clientHeight;
+  const p = toWorld(vp.getBoundingClientRect().left + vw / 2, vp.getBoundingClientRect().top + (vh - 150) / 2);
+  const z = zoneAt(p.x, p.y);
+  const pill = document.getElementById('zonePill');
+  if (z) pill.textContent = zoneUnlocked(z) ? z.name : `${z.name} · ${z.opens}`;
+}
+
+// tuiles
+const tilesEl = document.getElementById('tiles');
+for (const z of ZONES) {
+  const t = document.createElement('div'); t.className = 'tile'; t.dataset.zone = z.id;
+  t.style.left = z.x + 'px'; t.style.top = z.y + 'px'; t.style.width = z.w + 'px'; t.style.height = z.h + 'px';
+  t.innerHTML = `<img src="${ASSETS['zones/z' + z.id + '-' + z.slug + '.webp']}" alt="${z.name}"><div class="veil"><div class="lbl"><b>${z.name}</b><span>s'ouvre en ${z.opens}</span></div></div>`;
+  tilesEl.appendChild(t);
+}
+function refreshTiles() {
+  for (const t of tilesEl.children) { const z = zoneById[+t.dataset.zone]; t.classList.toggle('locked', !zoneUnlocked(z)); }
+}
+
+// ---------- stickers posés ----------
+const stickersEl = document.getElementById('stickers');
+const els = {};
+// ajustements fins par élément (facteur sur la taille de sa catégorie)
+const SCALE = { 1: .72 };
+function heightOf(s) { return SIZES[s.size] * (SCALE[s.id] || 1); }
+function renderPlaced(p, pop) {
+  const s = byId[p.id]; let el = els[p.uid];
+  if (!el) {
+    el = document.createElement('div'); el.className = 'st ' + s.cat; el.dataset.uid = p.uid;
+    el.innerHTML = `<div class="sh"></div><img src="${ASSETS['stickers/' + s.file]}" alt="${s.name}">`;
+    stickersEl.appendChild(el); els[p.uid] = el;
+    el.addEventListener('pointerdown', onStickerDown);
+  }
+  const h = heightOf(s), w = h * s.w / s.h;
+  el.style.width = w + 'px'; el.style.height = h + 'px';
+  const lift = s.cat === 'air' ? h * .9 : 0;
+  el.style.left = (p.x - w / 2) + 'px'; el.style.top = (p.y - h - lift) + 'px';
+  el.style.zIndex = s.cat === 'air' ? 700000 + Math.round(p.y) : Math.round(p.y) + 10;
+  el.classList.toggle('flip', !!p.flip);
+  if (pop) { el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+}
+function removePlaced(uid) { const el = els[uid]; if (el) { el.remove(); delete els[uid]; } state.placed = state.placed.filter(p => p.uid !== uid); }
+function removeAllOf(id) { for (const p of [...state.placed]) if (p.id === id) removePlaced(p.uid); }
+function renderAll() { for (const p of state.placed) renderPlaced(p); }
+
+// ---------- sélection & outils ----------
+const tools = document.getElementById('tools');
+let selected = null;
+function select(uid) {
+  if (selected && els[selected]) els[selected].classList.remove('sel');
+  selected = uid; if (!uid) { tools.hidden = true; return; }
+  els[uid].classList.add('sel'); positionTools();
+  tools.hidden = false;
+}
+function positionTools() {
+  if (!selected || !els[selected]) return;
+  const p = state.placed.find(q => q.uid === selected); if (!p) return; const s = byId[p.id];
+  const h = heightOf(s), lift = s.cat === 'air' ? h * .9 : 0;
+  const r = vp.getBoundingClientRect(), a = document.getElementById('app').getBoundingClientRect();
+  const sx = r.left - a.left + view.x + p.x * view.s, sy = r.top - a.top + view.y + (p.y - h - lift) * view.s - 12;
+  tools.style.left = Math.min(a.width - 90, Math.max(90, sx)) + 'px'; tools.style.top = Math.max(70, sy) + 'px';
+}
+document.getElementById('tFlip').onclick = () => { const p = state.placed.find(q => q.uid === selected); if (!p) return; p.flip = !p.flip; renderPlaced(p); save(); };
+document.getElementById('tStore').onclick = () => { if (!selected) return; removePlaced(selected); select(null); save(); refreshDrawer(); toast('Retiré du jardin'); };
+
+// ---------- pointeurs : carte, pinch, déplacement ----------
+const pointers = new Map();
+let mode = null, panStart = null, pinchStart = null, drag = null;
+vp.addEventListener('pointerdown', e => {
+  if (e.target.closest('.st')) return;
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (pointers.size === 1) { mode = 'pan'; panStart = { x: e.clientX, y: e.clientY, vx: view.x, vy: view.y, moved: false }; vp.classList.add('grabbing'); }
+  else if (pointers.size === 2) { mode = 'pinch'; const [a, b] = [...pointers.values()]; pinchStart = { d: Math.hypot(a.x - b.x, a.y - b.y), s: view.s, cx: (a.x + b.x) / 2, cy: (a.y + b.y) / 2, vx: view.x, vy: view.y }; }
+  vp.setPointerCapture(e.pointerId);
+});
+vp.addEventListener('pointermove', e => {
+  if (!pointers.has(e.pointerId)) return;
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (mode === 'pan' && panStart) {
+    const dx = e.clientX - panStart.x, dy = e.clientY - panStart.y;
+    if (Math.hypot(dx, dy) > 3) panStart.moved = true;
+    view.x = panStart.vx + dx; view.y = panStart.vy + dy; clampView(); applyView(); positionTools();
+  } else if (mode === 'pinch' && pinchStart && pointers.size === 2) {
+    const [a, b] = [...pointers.values()]; const d = Math.hypot(a.x - b.x, a.y - b.y);
+    const ns = Math.min(1.1, Math.max(.12, pinchStart.s * d / pinchStart.d));
+    const r = vp.getBoundingClientRect(); const cx = pinchStart.cx - r.left, cy = pinchStart.cy - r.top;
+    const k = ns / pinchStart.s;
+    view.x = cx - (cx - pinchStart.vx) * k; view.y = cy - (cy - pinchStart.vy) * k; view.s = ns; clampView(); applyView(); positionTools();
+  }
+});
+function endPointer(e) {
+  if (!pointers.has(e.pointerId)) return;
+  pointers.delete(e.pointerId);
+  if (mode === 'pan' && panStart && !panStart.moved) select(null);
+  if (pointers.size === 0) { mode = null; vp.classList.remove('grabbing'); }
+  else if (pointers.size === 1) { const [a] = [...pointers.values()]; mode = 'pan'; panStart = { x: a.x, y: a.y, vx: view.x, vy: view.y, moved: true }; }
+}
+vp.addEventListener('pointerup', endPointer); vp.addEventListener('pointercancel', endPointer);
+vp.addEventListener('wheel', e => {
+  e.preventDefault();
+  const r = vp.getBoundingClientRect(); const cx = e.clientX - r.left, cy = e.clientY - r.top;
+  const ns = Math.min(1.1, Math.max(.12, view.s * (e.deltaY < 0 ? 1.1 : 1 / 1.1))); const k = ns / view.s;
+  view.x = cx - (cx - view.x) * k; view.y = cy - (cy - view.y) * k; view.s = ns; clampView(); applyView(); positionTools();
+}, { passive: false });
+
+// déplacement d'un sticker posé
+function onStickerDown(e) {
+  const uid = e.currentTarget.dataset.uid; const p = state.placed.find(q => q.uid === uid); if (!p) return;
+  e.stopPropagation();
+  const el = e.currentTarget; el.setPointerCapture(e.pointerId);
+  const start = { x: e.clientX, y: e.clientY, px: p.x, py: p.y, moved: false };
+  const move = ev => {
+    const dx = (ev.clientX - start.x) / view.s, dy = (ev.clientY - start.y) / view.s;
+    if (!start.moved && Math.hypot(dx * view.s, dy * view.s) > 6) { start.moved = true; el.classList.add('lift'); select(null); }
+    if (start.moved) { p.x = start.px + dx; p.y = start.py + dy; renderPlaced(p); el.style.zIndex = 800000; }
+  };
+  const up = ev => {
+    el.removeEventListener('pointermove', move); el.removeEventListener('pointerup', up); el.removeEventListener('pointercancel', up);
+    el.classList.remove('lift');
+    if (start.moved) {
+      const z = zoneAt(p.x, p.y);
+      if (!z || !zoneUnlocked(z)) { p.x = start.px; p.y = start.py; toast(z ? `${z.name} s'ouvrira en ${z.opens}` : 'Reste dans le jardin', true); }
+      else { p.x = Math.max(20, Math.min(W - 20, p.x)); p.y = Math.max(60, Math.min(W - 10, p.y)); }
+      renderPlaced(p); save();
+    } else select(uid);
+  };
+  el.addEventListener('pointermove', move); el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+}
+
+// glisser depuis le tiroir
+const ghost = document.getElementById('ghost'), ghostImg = ghost.querySelector('img');
+function onItemDown(e) {
+  const item = e.currentTarget; const id = +item.dataset.id; const s = byId[id];
+  if (!owned(s)) return;
+  const start = { x: e.clientX, y: e.clientY, active: false };
+  const move = ev => {
+    const dx = ev.clientX - start.x, dy = ev.clientY - start.y;
+    if (!start.active) {
+      if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) {
+        start.active = true; item.setPointerCapture(ev.pointerId);
+        const h = heightOf(s) * view.s, w = h * s.w / s.h; ghostImg.src = ASSETS['stickers/' + s.file]; ghostImg.style.width = w + 'px'; ghostImg.style.height = h + 'px';
+        ghost.style.display = 'block';
+      } else return;
+    }
+    ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px';
+  };
+  const up = ev => {
+    item.removeEventListener('pointermove', move); item.removeEventListener('pointerup', up); item.removeEventListener('pointercancel', up);
+    if (!start.active) { if (Math.hypot(ev.clientX - start.x, ev.clientY - start.y) < 10) placeAtCenter(id); return; }
+    ghost.style.display = 'none';
+    const dr = document.getElementById('drawer').getBoundingClientRect();
+    if (ev.clientY < dr.top) {
+      const w = toWorld(ev.clientX, ev.clientY); const z = zoneAt(w.x, w.y);
+      if (z && zoneUnlocked(z)) { place(id, w.x, w.y, true); toast(`${s.name} posé`); }
+      else toast(z ? `${z.name} s'ouvrira en ${z.opens}` : 'Pose-le dans le jardin', true);
+    }
+  };
+  item.addEventListener('pointermove', move); item.addEventListener('pointerup', up); item.addEventListener('pointercancel', up);
+}
+function place(id, x, y, pop) {
+  const p = { uid: newUid(), id, x, y, flip: false }; state.placed.push(p); renderPlaced(p, pop); save(); refreshDrawer(); updateConiTarget();
+  return p;
+}
+// toucher un sticker de la planche : on le colle au centre de la vue (légèrement décalé s'il y en a déjà un là)
+function placeAtCenter(id) {
+  const r = vp.getBoundingClientRect(); const dr = document.getElementById('drawer').getBoundingClientRect();
+  const c = toWorld(r.left + r.width / 2, r.top + (dr.top - r.top) / 2);
+  const z = zoneAt(c.x, c.y);
+  if (!z || !zoneUnlocked(z)) { toast(z ? `${z.name} s'ouvrira en ${z.opens}` : 'Rapproche-toi du jardin', true); return; }
+  const n = state.placed.filter(p => Math.hypot(p.x - c.x, p.y - c.y) < 60).length;
+  const a = n * 2.1, d = n ? 90 + 20 * n : 0;
+  const p = place(id, c.x + Math.cos(a) * d, c.y + Math.sin(a) * d * .6, true);
+  setTimeout(() => select(p.uid), 50);
+}
+
+// place suggérée pour un nouvel élément
+function suggestSpot(s) {
+  let z = zoneById[s.zone]; if (!zoneUnlocked(z)) z = zoneById[levelOf(state.chapters) === 'A1.1' ? 2 : ZONES.find(q => q.opens === levelOf(state.chapters))?.id || 5];
+  if (!zoneUnlocked(z)) z = zoneById[5];
+  const spots = (s.cat === 'eau' && z.id === 8) ? WATER : SPOTS[z.id];
+  const taken = state.placed.map(p => p);
+  for (const [fx, fy] of spots) {
+    const x = z.x + fx * z.w, y = z.y + fy * z.h;
+    if (!taken.some(p => Math.hypot(p.x - x, p.y - y) < 180)) return { x, y };
+  }
+  const [fx, fy] = spots[Math.floor(Math.random() * spots.length)];
+  return { x: z.x + fx * z.w + (Math.random() - .5) * 160, y: z.y + fy * z.h + (Math.random() - .5) * 100 };
+}
+
+// ---------- tiroir ----------
+const shelfOwned = document.getElementById('shelfOwned'), shelfLocked = document.getElementById('shelfLocked');
+function itemHTML(s, cls, badge) {
+  return `<div class="item ${cls}" data-id="${s.id}" tabindex="0"><span class="ch">${badge}</span><div class="th"><img src="${ASSETS['stickers/' + s.file]}" alt="${s.name}" title="${s.name}"></div></div>`;
+}
+function refreshDrawer() {
+  const own = stickers.filter(s => owned(s)).sort((a, b) => (b.chapter || 99) - (a.chapter || 99));
+  const lock = stickers.filter(s => !owned(s)).sort((a, b) => (a.chapter || 99) - (b.chapter || 99));
+  shelfOwned.innerHTML = own.length ? own.map(s => itemHTML(s, 'owned', countPlaced(s.id) ? '× ' + countPlaced(s.id) : '')).join('')
+    : `<div class="empty">Termine ton premier chapitre pour gagner ton premier sticker.</div>`;
+  shelfLocked.innerHTML = lock.map(s => itemHTML(s, s.chapter ? 'locked' : 'locked surprise', s.chapter ? 'Ch. ' + s.chapter : '★')).join('');
+  for (const it of shelfOwned.querySelectorAll('.item')) it.addEventListener('pointerdown', onItemDown);
+  for (const it of shelfLocked.querySelectorAll('.item')) it.addEventListener('click', () => { const s = byId[+it.dataset.id]; toast(s.chapter ? `${s.name} · chapitre ${s.chapter} (${s.level})` : `${s.name} · surprise : ${s.surprise.split(' · ')[1]}`); });
+  document.getElementById('cntOwned').textContent = own.length + ' / 80';
+  document.getElementById('cntLocked').textContent = lock.length;
+}
+function setDrawer(open) { state.drawerOpen = open; document.getElementById('drawer').classList.toggle('hidden-drawer', !open); save(); }
+{ const h = document.getElementById('handle'); let hs = null;
+  h.addEventListener('pointerdown', e => { hs = { y: e.clientY, t: Date.now() }; h.setPointerCapture(e.pointerId); });
+  h.addEventListener('pointerup', e => { if (!hs) return; const dy = e.clientY - hs.y; hs = null; if (dy > 24) setDrawer(false); else if (dy < -24) setDrawer(true); else setDrawer(!state.drawerOpen); });
+  h.addEventListener('pointercancel', () => hs = null); }
+document.getElementById('drawer').classList.toggle('hidden-drawer', !state.drawerOpen);
+
+// ---------- toast ----------
+let toastT; function toast(msg, warn) { const t = document.getElementById('toast'); t.textContent = msg; t.className = 'on' + (warn ? ' warn' : ''); clearTimeout(toastT); toastT = setTimeout(() => t.className = '', 2200); }
+
+// ---------- progression (démo) ----------
+function applyProgress(prev) {
+  refreshTiles();
+  // nouveaux éléments → place suggérée
+  const fresh = stickers.filter(s => owned(s) && !isPlaced(s.id) && (s.chapter ? s.chapter > prev : true) && !state.seen?.includes(s.id));
+  state.seen = state.seen || [];
+  let delay = 0;
+  for (const s of fresh) {
+    state.seen.push(s.id);
+    setTimeout(() => { const sp = suggestSpot(s); place(s.id, sp.x, sp.y, true); }, delay); delay += 180;
+  }
+  if (fresh.length === 1) toast(`Nouveau : ${fresh[0].name}`); else if (fresh.length > 1) toast(`${fresh.length} nouveaux éléments dans ton jardin`);
+  save(); refreshDrawer(); updateConiTarget();
+}
+// (la démo de progression de la maquette a été retirée : l'app fournit la progression réelle)
+// panneaux
+document.getElementById('btnCollection').onclick = () => { buildCollection(); document.getElementById('sheetCollection').classList.add('on'); };
+for (const b of document.querySelectorAll('[data-close]')) b.onclick = () => b.closest('.sheet').classList.remove('on');
+
+function buildCollection() {
+  const c = document.getElementById('collection'); let html = '';
+  for (const l of LEVELS) {
+    const z = ZONES.find(q => q.opens === l) || (l === 'A1.1' ? zoneById[2] : null);
+    html += `<div class="lv"><b>${l}</b><span>${z ? z.name : ''} · chapitres ${l === 'A1.1' ? 1 : LEVEL_END[LEVELS[levelIndex(l) - 1]] + 1}–${LEVEL_END[l]}</span></div><div class="grid">`;
+    for (const s of stickers.filter(s => s.level === l).sort((a, b) => a.chapter - b.chapter)) html += cardHTML(s, 'Ch. ' + s.chapter);
+    html += '</div>';
+  }
+  html += `<div class="lv"><b>Surprises</b><span>badges & séries</span></div><div class="grid">`;
+  for (const s of stickers.filter(s => s.surprise)) html += cardHTML(s, '★');
+  html += '</div>';
+  c.innerHTML = html;
+}
+function cardHTML(s, no) {
+  const cls = (owned(s) ? '' : ' locked') + (isPlaced(s.id) ? ' placed' : '');
+  return `<div class="card${cls}" data-n="× ${countPlaced(s.id)}"><span class="no">${no}</span><span class="sz">${s.size}</span><div class="th"><img src="${ASSETS['stickers/' + s.file]}" alt=""></div><div class="nm">${s.name}</div><div class="mt">${zoneById[s.zone].name}</div></div>`;
+}
+
+// ---------- lumière ----------
+function applyLight() {
+  let m = state.light;
+  if (m === 'auto') { const h = new Date().getHours(); m = h < 6 || h >= 21 ? 'night' : h < 9 ? 'dawn' : h < 18 ? 'day' : 'evening'; }
+  document.getElementById('sky').className = m;
+}
+setInterval(applyLight, 60000);
+
+// ---------- Coni : il se déplace sur les allées et contourne la fontaine ----------
+const coni = document.getElementById('coni');
+let coniPose = 'profil', coniTimer, coniBusy = false, coniZone = 5;
+function setPose(p) { coniPose = p; for (const im of coni.querySelectorAll('img')) im.classList.toggle('on', im.dataset.pose === p); }
+const CONI_SPEED = 260; // unités de carte par seconde
+const F = (fx, fy) => ({ x: fx * W, y: fy * W });
+// réseau des allées (fractions de la carte HD) : deux allées verticales, deux horizontales, l'anneau de la fontaine, les épis nord et sud
+const PN = []; const PE = []; const nodeIdx = {};
+function AN(name, fx, fy) { nodeIdx[name] = PN.length; PN.push({ name, ...F(fx, fy) }); }
+function E(a, b) { PE.push([nodeIdx[a], nodeIdx[b]]); }
+const X1 = .359, X2 = .644, Y1 = .338, Y2 = .605, CX = .5, CY = .47, RX = .13, RY = .125;
+for (const [nm, fx] of [['a', .06], ['b', .2], ['c', X1], ['d', .5], ['e', X2], ['f', .8], ['g', .94]]) { AN('h1' + nm, fx, Y1); AN('h2' + nm, fx, Y2); }
+for (const [nm, fy] of [['a', .06], ['b', .2], ['c', Y1], ['d', .47], ['e', Y2], ['f', .8], ['g', .94]]) { AN('v1' + nm, X1, fy); AN('v2' + nm, X2, fy); }
+for (let k = 0; k < 8; k++) { const a = -Math.PI / 2 + k * Math.PI / 4; AN('r' + k, CX + Math.cos(a) * RX, CY + Math.sin(a) * RY); }
+AN('nspur', .5, .25); AN('sspur', .5, .7);
+const seqH = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+for (let i = 0; i < seqH.length - 1; i++) { E('h1' + seqH[i], 'h1' + seqH[i + 1]); E('h2' + seqH[i], 'h2' + seqH[i + 1]); E('v1' + seqH[i], 'v1' + seqH[i + 1]); E('v2' + seqH[i], 'v2' + seqH[i + 1]); }
+for (let k = 0; k < 8; k++) E('r' + k, 'r' + ((k + 1) % 8));
+E('r0', 'h1d'); E('r4', 'h2d'); E('h1d', 'nspur'); E('h2d', 'sspur');   // nord / sud
+E('r7', 'h1c'); E('r1', 'h1e'); E('r5', 'h2c'); E('r3', 'h2e');           // diagonales vers les croisements
+E('r6', 'v1d'); E('r2', 'v2d');                                           // ouest / est
+// point de visite de chaque zone (hors allée) et nœud d'entrée sur l'allée
+const VISIT = { 1: ['h1b', .2, .26], 2: ['nspur', .46, .2], 3: ['h1f', .8, .3], 4: ['v1d', .25, .5], 5: ['r6', CX - RX - .03, CY + .02], 6: ['v2d', .75, .45], 7: ['v1f', .3, .86], 8: ['sspur', .5, .655], 9: ['h2f', .8, .66] };
+function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+function route(from, to) { // Dijkstra sur le réseau
+  const n = PN.length, d = Array(n).fill(Infinity), prev = Array(n).fill(-1), done = Array(n).fill(false); d[from] = 0;
+  for (let it = 0; it < n; it++) {
+    let u = -1; for (let i = 0; i < n; i++) if (!done[i] && (u < 0 || d[i] < d[u])) u = i;
+    if (u < 0 || d[u] === Infinity) break; done[u] = true; if (u === to) break;
+    for (const [a, b] of PE) { const v = a === u ? b : b === u ? a : -1; if (v < 0) continue; const nd = d[u] + dist(PN[a], PN[b]); if (nd < d[v]) { d[v] = nd; prev[v] = u; } }
+  }
+  const path = []; for (let v = to; v >= 0; v = prev[v]) path.unshift(v); return path;
+}
+let coniPos = { ...PN[nodeIdx['r6']] }, coniNode = nodeIdx['r6'];
+function coniAt(x, y, instant) {
+  coni.style.transition = instant ? 'none' : `left ${coniDur}s linear, top ${coniDur}s linear`;
+  coni.style.left = (x - 66) + 'px'; coni.style.top = (y - 180) + 'px'; coni.style.zIndex = Math.round(y) + 10;
+  coniPos = { x, y };
+}
+let coniDur = 0;
+// cadres de course (planche d'Isa du 21 sept.) selon la direction du segment
+const FRAMES = { side: ['mv03', 'mv07', 'mv12'], diag: ['mv02', 'mv06', 'mv08'], down: ['mv09', 'mv10', 'mv01'], up: ['mv05', 'mv11'] };
+let frameTimer = null, frameIdx = 0;
+function startHop(dx, dy) {
+  const ax = Math.abs(dx), ay = Math.abs(dy);
+  const set = ay > ax * 2.2 ? (dy > 0 ? FRAMES.down : FRAMES.up) : ax > ay * 2.2 ? FRAMES.side : FRAMES.diag;
+  coni.classList.toggle('flip', set !== FRAMES.down && set !== FRAMES.up && dx < 0); // les cadres regardent à droite
+  coni.classList.add('hop'); clearInterval(frameTimer); frameIdx = 0; setPose(set[0]);
+  frameTimer = setInterval(() => { frameIdx = (frameIdx + 1) % set.length; setPose(set[frameIdx]); }, 210);
+}
+function stopHop() { clearInterval(frameTimer); frameTimer = null; coni.classList.remove('hop'); }
+function walk(points, cb) { // enchaîne les segments à vitesse constante
+  if (!points.length) { stopHop(); cb && cb(); return; }
+  const [p, ...rest] = points; const d = dist(coniPos, p); coniDur = Math.max(.15, d / CONI_SPEED);
+  startHop(p.x - coniPos.x, p.y - coniPos.y); coniAt(p.x, p.y);
+  coniTimer = setTimeout(() => walk(rest, cb), coniDur * 1000 + 40);
+}
+function travelTo(zoneId, finalPoint, cb) { // retour sur l'allée, trajet par les allées, puis pas de côté vers le point
+  const [entry, fx, fy] = VISIT[zoneId]; const target = finalPoint || F(fx, fy);
+  const pts = [];
+  if (dist(coniPos, PN[coniNode]) > 4) pts.push(PN[coniNode]);
+  const r = route(coniNode, nodeIdx[entry]); for (const i of r.slice(1)) pts.push(PN[i]);
+  pts.push(target); coniNode = nodeIdx[entry]; coniZone = zoneId;
+  walk(pts, cb);
+}
+function updateConiTarget() {
+  if (coniBusy) return; // il finira son trajet avant de changer d'avis
+  clearTimeout(coniTimer); coniBusy = true;
+  const seat = state.placed.find(p => SEATS.has(p.id) && zoneUnlocked(zoneAt(p.x, p.y)));
+  if (seat) {
+    const s = byId[seat.id]; const w = heightOf(s) * s.w / s.h; const z = zoneAt(seat.x, seat.y);
+    travelTo(z.id, { x: seat.x + w * .62, y: seat.y + 6 }, () => { setPose('assis'); coniTimer = setTimeout(() => { setPose('dodo'); coniBusy = false; }, 9000); });
+    return;
+  }
+  const open = ZONES.filter(z => zoneUnlocked(z) && z.id !== coniZone);
+  const z = open[Math.floor(Math.random() * open.length)] || zoneById[5];
+  travelTo(z.id, null, () => { setPose(Math.random() < .3 ? 'joie' : 'assis'); coniTimer = setTimeout(() => { coniBusy = false; updateConiTarget(); }, 4000 + Math.random() * 4000); });
+}
+coniAt(coniPos.x, coniPos.y, true); setPose('assis');
+// ---------- réactions quand on touche Coni ----------
+let reacting = false;
+function freezeConi() { // arrête le trajet en cours là où il est
+  const cs = getComputedStyle(coni); const l = parseFloat(cs.left), t = parseFloat(cs.top);
+  clearTimeout(coniTimer); stopHop(); coni.style.transition = 'none'; coni.style.left = l + 'px'; coni.style.top = t + 'px';
+  coniPos = { x: l + 66, y: t + 180 };
+}
+function bulle(txt, ms) { coni.querySelector('.bulle').textContent = txt; coni.classList.add('talk'); setTimeout(() => coni.classList.remove('talk'), ms); }
+const REACTIONS = [
+  () => { // saut de joie
+    setPose('joie'); coni.classList.add('react-jump'); bulle(['Evviva!', 'Che bello!', 'Brava!'][Math.floor(Math.random() * 3)], 1900);
+    return 1900;
+  },
+  () => { // surprise
+    setPose('surprise'); coni.classList.add('react-shake'); bulle(['Oh!', 'Mamma mia!', 'Ehi!'][Math.floor(Math.random() * 3)], 1500);
+    return 1500;
+  },
+  () => { // pirouette
+    const seq = ['mv12', 'mv09', 'mv12', 'mv05', 'mv12', 'mv09']; let i = 0; coni.classList.add('hop');
+    const t = setInterval(() => { i++; if (i >= seq.length) { clearInterval(t); coni.classList.remove('hop'); setPose('assis'); return; } coni.classList.toggle('flip', i % 4 === 2); setPose(seq[i]); }, 180);
+    setPose(seq[0]); bulle(['Ciao!', 'Andiamo?', 'Sono qui!'][Math.floor(Math.random() * 3)], 1700);
+    return 1700;
+  },
+];
+let lastReaction = -1;
+coni.addEventListener('pointerdown', e => {
+  e.stopPropagation(); if (reacting) return;
+  reacting = true; coniBusy = true; freezeConi();
+  let k; do { k = Math.floor(Math.random() * REACTIONS.length); } while (k === lastReaction); lastReaction = k;
+  const ms = REACTIONS[k]();
+  setTimeout(() => { coni.classList.remove('react-jump', 'react-shake'); reacting = false; coniBusy = false; setPose('assis'); coniTimer = setTimeout(updateConiTarget, 1200); }, ms + 100);
+});
+
+
+// ---------- démarrage ----------
+refreshTiles(); renderAll(); refreshDrawer(); applyLight();
+centerOn(5);
+state.seen = state.seen || [];
+applyProgress(-1); // les éléments gagnés depuis la dernière visite se posent d'eux-mêmes
+setTimeout(updateConiTarget, 1500);
+window.addEventListener('resize', () => { clampView(); applyView(); positionTools(); });
+</script>
+
+</body></html>
