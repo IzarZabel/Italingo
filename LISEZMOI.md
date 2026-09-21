@@ -1,4 +1,4 @@
-# Italingo — dossier de l'application (étape 1 · socle · v0.1.0)
+# Italingo — dossier de l'application (étape 1 · socle + jardin · v0.2.0)
 
 Ce dossier **est** l'application : c'est lui qu'on met en ligne (GitHub Pages) pour l'installer sur Android. Rien à compiler, rien à installer : des pages web, des feuilles de style, du contenu et des dessins.
 
@@ -15,6 +15,7 @@ Ce dossier **est** l'application : c'est lui qu'on met en ligne (GitHub Pages) p
 | `assets/decors/` · `assets/lapin/` · `assets/icones/` | Les 47 décors, les 14 poses de Coni + 2 rigs, les 6 icônes — copies nettoyées de `DA/Charte Aube`. |
 | `assets/fonts/` | Instrument Serif et Manrope, embarquées pour fonctionner hors ligne. |
 | `icons/` | L'icône de l'app (tête de Coni sur cacao, recommandée par la charte). |
+| `jardin/` | Le jardin aménageable (référence `claude/jardin-amenageable.md`) : `index.html` (la maquette d'Isa adaptée : plus de panneau Démo, progression et sauvegarde reliées à l'app), `zones/` (9 parcelles), `stickers/` (80 éléments), `coni/` (poses et course). Ouvert plein écran depuis Moi › Aménager. |
 | `manifest.webmanifest` · `sw.js` | Ce qui rend l'app **installable** et **hors ligne**. |
 | `outil/construire-sw.py` | Petit outil à relancer à chaque nouvelle version (il régénère `sw.js`). Pas besoin d'y toucher. |
 

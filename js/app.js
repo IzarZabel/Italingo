@@ -8,7 +8,7 @@
 (function () {
   'use strict';
   const A = window.ITALINGO_ASSETS;
-  const VERSION_APP = '0.1.1 · socle';
+  const VERSION_APP = '0.2.1 · socle + jardin';
   let PROG = null;            // programme.json (niveaux + chapitres)
   let etat = Store.charger();
 
@@ -252,18 +252,18 @@
     const s0 = st.serie === 0;
     const sc = scroll(
       entete(dateIT(), s),
-      h('div', { class: 'arch' }, deco('arche-hero'), anneau(Math.floor(j.minutes), obj, atteint ? 'fatto !' : 'minutes')),
+      h('div', { class: 'arch', style: 'margin-top:30px' }, deco('arche-hero'), anneau(Math.floor(j.minutes), obj, atteint ? 'fatto !' : 'minutes')),
       h('div', { class: 'arch-cta' }, h('button', { class: 'btn' + (atteint ? ' soft' : ''), style: atteint ? 'box-shadow:none' : '', onclick: () => enCours ? feuilleLecon(ch, enCours) : (st.faites ? allerOnglet('parcours') : feuilleLecon(ch, ch.lecons[0])) },
         atteint ? 'Encore un peu ?' : enCours ? 'Continuer la leçon' : 'Commencer')),
       h('div', { class: 'serie' }, lapin(atteint ? 'dodo' : s0 ? 'face' : 'joie', atteint ? 'width:66px' : ''),
         h('div', null, h('b', null, String(st.serie)), h('span', null, s0 ? 'jour d’affilée · ta série démarre aujourd’hui' : `jours d’affilée · ${st.jokers} joker${st.jokers > 1 ? 's' : ''}`))),
-      h('div', { class: 'sect' }, h('span', { class: 't' }, 'Aujourd’hui'), h('span', { class: 'more' }, atteint ? 'objectif atteint' : `${Math.max(0, obj - Math.floor(j.minutes))} min restantes`)),
+      h('div', { class: 'sect' }, h('span', { class: 't' }, 'Aujourd’hui')),
       st.dus > 0
         ? h('div', { class: 'card peach', style: 'margin-bottom:10px' }, h('div', { class: 'row' }, h('div', { class: 'txt' }, h('b', null, `${st.dus} éléments à réviser`), h('span', null, 'environ ' + Math.ceil(st.dus / 3) + ' min')), h('button', { class: 'btn sm', onclick: () => allerOnglet('exercices') }, 'Réviser')))
         : h('div', { class: 'card', style: 'margin-bottom:10px' }, h('div', { class: 'row' }, h('div', { class: 'txt' }, h('b', null, 'Rien à réviser pour l’instant'), h('span', null, 'Les mots appris reviendront ici le lendemain de chaque leçon.')))),
       h('div', { class: 'sect' }, h('span', { class: 't' }, `Chapitre ${ch.n}`), h('button', { class: 'more', onclick: () => allerOnglet('parcours') }, 'Voir tout le parcours ›')),
       h('div', { class: 'card white', style: 'padding:6px 16px' },
-        h('div', { class: 'row', style: 'padding:8px 0 4px' }, h('div', { class: 'txt' }, h('b', { style: 'font-family:var(--fh);font-weight:400;font-size:20px' }, ch.it), h('span', null, `${ch.fr} · ${leconsTerminees(ch)} / ${ch.lecons.length - 1}`))),
+        h('div', { class: 'row', style: 'padding:8px 0 4px' }, h('div', { class: 'txt' }, h('b', { style: 'font-family:var(--fh);font-weight:400;font-size:20px' }, ch.it), h('span', null, `${ch.fr} · `, h('i', { class: 'hl' }, `${leconsTerminees(ch)} / ${ch.lecons.length - 1}`)))),
         h('div', { class: 'nodes compact' }, suivantes.map(l => noeud(ch, l, true))))
     );
     if (window.__installPrompt && !etat.meta.installIgnore) sc.append(banniereInstall());
@@ -292,7 +292,7 @@
     };
     rendre();
     const sc = scroll(
-      h('div', { class: 'bg', style: 'right:-16px;top:-10px;width:82px' }, deco('p13')),
+      h('div', { class: 'bg', style: 'right:-16px;top:-10px;width:82px;transform:scaleX(-1)' }, deco('p13')),
       entete('Niveau A1 · débutante', 'Ton <em>parcours</em>.'),
       seg, corps);
     return h('div', null, sc);
@@ -378,16 +378,17 @@
   /* ------------------------------------------------------------------ */
   function ecranExercices() {
     const st = Store.stats();
-    const bloc = (titre, sous, ...reste) => h('div', { class: 'card white', style: 'margin-top:12px' }, h('b', { style: 'display:block;font-size:15px' }, titre), h('span', { class: 'muted small', style: 'display:block;margin-top:2px' }, sous), ...reste);
+    const illus = n => h('img', { class: 'illus', src: `assets/illus/${n}.png`, alt: '', draggable: 'false' });
+    const bloc = (img, titre, sous, ...reste) => h('div', { class: 'card white', style: 'margin-top:12px' }, h('div', { class: 'row illus-row' }, illus(img), h('div', { class: 'txt' }, h('b', null, titre), h('span', null, sous), ...reste)));
     const bientot = 'Disponible avec les premières leçons.';
     const sc = scroll(
-      h('div', { class: 'bg', style: 'right:-16px;top:-16px;width:82px' }, deco('p13')),
+      h('div', { class: 'bg', style: 'right:-16px;top:-16px;width:82px;transform:scaleX(-1)' }, deco('p13')),
       entete('À la demande', 'Envie de <em>t’exercer</em> ?'),
-      h('div', { class: 'card peach', style: 'margin-top:20px' }, h('div', { class: 't' }, 'Révision du jour'),
-        st.dus ? h('div', { class: 'row' }, h('div', { class: 'txt' }, h('b', null, `${st.dus} éléments t’attendent`), h('span', null, 'environ ' + Math.ceil(st.dus / 3) + ' min')), h('button', { class: 'btn sm' }, 'Réviser'))
-          : h('div', { class: 'row' }, lapin('dodo', 'width:56px;flex:none'), h('div', { class: 'txt' }, h('b', null, 'Rien à réviser aujourd’hui'), h('span', null, 'Coni se repose. Tes premiers mots arriveront ici le lendemain de ta première leçon.')))),
-      bloc('Raviver la mémoire', 'Des chapitres que tu n’as pas revus depuis longtemps', h('p', { class: 'muted small', style: 'margin:8px 0 0' }, 'Dès que tu auras terminé un chapitre, il apparaîtra ici quand il commencera à dater.')),
-      bloc('Renforcement', 'Là où tu te trompes le plus, ces 30 derniers jours', h('p', { class: 'muted small', style: 'margin:8px 0 0' }, 'Le podium de tes points fragiles se construira à partir de tes réponses.')),
+      h('div', { class: 'card peach', style: 'margin-top:20px' }, h('div', { class: 'row illus-row' }, illus('revision'), h('div', { class: 'txt' }, h('div', { class: 't' }, 'Révision du jour'),
+        st.dus ? [h('b', null, h('i', { class: 'hl' }, `${st.dus} éléments`), ' t’attendent'), h('span', null, 'environ ' + Math.ceil(st.dus / 3) + ' min'), h('button', { class: 'btn sm', style: 'margin-top:10px' }, 'Réviser')]
+          : [h('b', null, 'Rien à réviser aujourd’hui'), h('span', null, 'Tes premiers mots arriveront ici le lendemain de ta première leçon.')]))),
+      bloc('raviver', 'Raviver la mémoire', 'Des chapitres que tu n’as pas revus depuis longtemps', h('p', { class: 'muted small', style: 'margin:8px 0 0' }, 'Dès que tu auras terminé un chapitre, il apparaîtra ici quand il commencera à dater.')),
+      bloc('renforcement', 'Renforcement', 'Là où tu te trompes le plus, ces 30 derniers jours', h('p', { class: 'muted small', style: 'margin:8px 0 0' }, 'Le podium de tes points fragiles se construira à partir de tes réponses.')),
       h('div', { style: 'margin-top:18px' }, h('b', { style: 'display:block;font-size:15px;margin-bottom:8px' }, 'Entraînement libre'),
         h('div', { class: 'chips' }, ['Prononciation', 'Compréhension orale', 'Compréhension écrite', 'Expression écrite', 'Dictée'].map(n => h('button', { class: 'chip ghost', onclick: () => toast(bientot, true) }, n)))),
       h('div', { class: 'card white', style: 'margin-top:14px;border-color:var(--rouille)' }, h('div', { class: 'row' }, h('div', { class: 'txt' }, h('b', null, 'Réflexes ', h('i', { class: 'muted', style: 'font-weight:400;font-style:normal' }, '· 1 min')), h('span', null, 'Associe les paires le plus vite possible · uniquement des mots appris')), h('button', { class: 'btn sm rust', onclick: () => toast('Le jeu s’ouvrira dès que tu connaîtras tes premiers mots.', true) }, 'Jouer'))),
@@ -412,8 +413,7 @@
         lapin('dos', 'position:absolute;right:10px;bottom:4px;width:48px')),
       h('div', { style: 'display:flex;justify-content:space-between;align-items:baseline;margin-top:12px' }, h('span', { class: 'tag' }, 'Niveau du jardin'), h('span', { style: 'font-size:12.5px' }, `Niveau ${nj.n} · `, h('b', null, nj.nom), ` · ${st.xp} XP`)),
       h('div', { class: 'prog thick', style: 'margin:8px 0 6px' }, h('i', { style: `width:${nj.pct}%` })),
-      h('div', { class: 'muted small' }, `${nj.prochain - st.xp} XP avant le niveau ${nj.n + 1} · ${st.serie} jour${st.serie > 1 ? 's' : ''} d’affilée · ${st.jokers} jokers · record ${st.meilleure}`),
-      h('div', { class: 'card', style: 'margin-top:16px' }, h('div', { class: 'row' }, deco('arche-basse', 'width:64px;opacity:.55;flex:none'), h('div', { class: 'txt' }, h('b', null, 'Jardin aménageable'), h('span', null, 'Chaque niveau débloque un élément à poser sous tes plantes : arche, roseraie, pierres, cabane… En conception, dans une conversation dédiée.'))), h('div', { style: 'display:flex;justify-content:flex-end;margin-top:10px' }, h('button', { class: 'btn sm', disabled: true }, 'Aménager'))),
+      carteJardin(),
       h('div', { class: 'card white row tap', style: 'margin-top:12px', onclick: () => ouvrirSous(ecranNiveau) }, h('div', { class: 'txt' }, h('div', { class: 'tag' }, 'Ton niveau'), h('div', { style: 'display:flex;align-items:baseline;gap:8px' }, h('span', { style: 'font-family:var(--fh);font-size:38px;line-height:1' }, 'A1'), h('span', { class: 'muted small' }, '· 0 % vers A1.1'))), chev.cloneNode(true)),
       h('div', { class: 'card white row tap', style: 'margin-top:12px', onclick: () => ouvrirSous(ecranMots) }, h('div', { class: 'txt' }, h('span', { style: 'font-family:var(--fh);font-size:30px;line-height:1' }, String(st.mots)), ' ', h('span', { style: 'font-size:13px' }, `mot${st.mots > 1 ? 's' : ''} connu${st.mots > 1 ? 's' : ''}`), h('span', null, st.mots ? `dont ${st.maitrises} maîtrisés` : 'Le premier arrive avec la première leçon.')), chev.cloneNode(true)),
       h('div', { class: 'card white row tap', style: 'margin-top:12px', onclick: () => toast('La liste se déploiera ici, chapitre par chapitre.', true) }, h('div', { class: 'txt' }, h('span', { style: 'font-family:var(--fh);font-size:30px;line-height:1' }, String(st.faites)), ' ', h('span', { style: 'font-size:13px' }, `leçon${st.faites > 1 ? 's' : ''} faite${st.faites > 1 ? 's' : ''}`), h('span', null, `sur ${PROG.chapitres.slice(0, 16).reduce((s, c) => s + c.lecons.length, 0)} au niveau A1`)), h('span', { class: 'chev' }, '⌄')),
@@ -422,6 +422,45 @@
     );
     return h('div', null, sc);
   }
+
+  /* ---------- jardin aménageable (référence : claude/jardin-amenageable.md) ---------- */
+  const JARDIN_ZONES = [
+    { id: 1, slug: 'grand-arbre', nom: 'Grand arbre', ouvre: 'B1.1' }, { id: 2, slug: 'terrasse', nom: 'Terrasse', ouvre: null }, { id: 3, slug: 'potager', nom: 'Potager', ouvre: 'B1.2' },
+    { id: 4, slug: 'agrumier', nom: 'Agrumier', ouvre: 'A1.2' }, { id: 5, slug: 'fontaine', nom: 'Fontaine', ouvre: null }, { id: 6, slug: 'massifs', nom: 'Massifs fleuris', ouvre: 'A2.1' },
+    { id: 7, slug: 'serre', nom: 'Serre', ouvre: 'B2.1' }, { id: 8, slug: 'bassin', nom: 'Bassin', ouvre: 'A2.2' }, { id: 9, slug: 'olivier', nom: 'Olivier', ouvre: 'B2.2' }];
+  const NIVEAUX_ORDRE = ['A1.1', 'A1.2', 'A2.1', 'A2.2', 'B1.1', 'B1.2', 'B2.1', 'B2.2'];
+  const FIN_NIVEAU = { 'A1.1': 8, 'A1.2': 16, 'A2.1': 25, 'A2.2': 34, 'B1.1': 44, 'B1.2': 54, 'B2.1': 64, 'B2.2': 74 };
+  function chapitresAccomplis() { let n = 0; while (etat.progression.chapitres[n + 1] && etat.progression.chapitres[n + 1].termine) n++; return n; }
+  function niveauJardinCECRL(ch) { for (const l of NIVEAUX_ORDRE) if (ch < FIN_NIVEAU[l]) return l; return 'B2.2'; }
+  function zoneOuverte(z) { return !z.ouvre || NIVEAUX_ORDRE.indexOf(niveauJardinCECRL(chapitresAccomplis())) >= NIVEAUX_ORDRE.indexOf(z.ouvre); }
+  let CATALOGUE = null;
+  const Z5 = { x: 1470, y: 1384, w: 1168, h: 1094 };           // parcelle Fontaine (grille.json)
+  const TAILLES = { P: 184, M: 287, G: 427 }, ECHELLE_ELEM = { 1: .72 };
+  function carteJardin() {
+    const j = etat.acquis.jardin || {};
+    const poses = Array.isArray(j.placed) ? j.placed : [];
+    const apercu = h('div', { class: 'jardin-apercu', onclick: () => ouvrirSous(ecranJardin) }, h('img', { class: 'fond', src: 'jardin/zones/z5-fontaine.webp', alt: 'Ton jardin', draggable: 'false' }));
+    const dessiner = () => {
+      if (!CATALOGUE) return;
+      const W = apercu.clientWidth, H = apercu.clientHeight; if (!W) return;
+      const k = Math.max(W / Z5.w, H / Z5.h), ox = (W - Z5.w * k) / 2, oy = (H - Z5.h * k) / 2;
+      apercu.querySelectorAll('.el').forEach(e => e.remove());
+      const byId = Object.fromEntries(CATALOGUE.stickers.map(x => [x.id, x]));
+      poses.filter(p => p.x >= Z5.x && p.x < Z5.x + Z5.w && p.y >= Z5.y && p.y < Z5.y + Z5.h).sort((a, b) => a.y - b.y).forEach(p => {
+        const st = byId[p.id]; if (!st) return;
+        const hh = TAILLES[st.size] * (ECHELLE_ELEM[st.id] || 1) * k, ww = hh * st.w / st.h, lift = st.cat === 'air' ? hh * .9 : 0;
+        apercu.append(h('img', { class: 'el', src: 'jardin/stickers/' + st.file, alt: '', draggable: 'false', style: `left:${ox + (p.x - Z5.x) * k - ww / 2}px;top:${oy + (p.y - Z5.y) * k - hh - lift}px;width:${ww}px;height:${hh}px;${p.flip ? 'transform:scaleX(-1)' : ''}` }));
+      });
+    };
+    requestAnimationFrame(() => { dessiner(); });
+    if (!CATALOGUE) fetch('jardin/catalogue.json').then(r => r.json()).then(c => { CATALOGUE = c; dessiner(); }).catch(() => {});
+    return h('div', { class: 'card white jardin-card', style: 'margin-top:16px' }, apercu, h('button', { class: 'btn sm jardin-btn', onclick: () => ouvrirSous(ecranJardin) }, 'Aménager'));
+  }
+  function ecranJardin() {
+    const fr = h('iframe', { class: 'jardin-frame', src: 'jardin/index.html', title: 'Ton jardin', allow: 'fullscreen' });
+    return h('div', { class: 'jardin-ecran' }, fr);
+  }
+  window.addEventListener('message', ev => { if (ev.data && ev.data.type === 'jardin:fermer' && pile.length) { history.back(); setTimeout(() => { if (ongletCourant === 'moi' && !pile.length) rendreOnglet(); }, 350); } });
 
   function ecranNiveau() {
     const comps = ['Écouter', 'Lire', 'Parler', 'Écrire'];

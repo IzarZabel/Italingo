@@ -385,3 +385,39 @@ body{font-size:16px}
 /* onboarding : question et phrase d'explication plus grandes */
 .onb .greet.sm{font-size:34px;line-height:1.08}
 .onb .date{font-size:15.5px;line-height:1.45;margin-top:10px}
+
+/* =====================================================================
+   AJUSTEMENTS v0.1.2 — retours d'Isa (21 sept. 2026)
+   Contraste : textes secondaires et filets plus soutenus (taupe foncé).
+   Illustrations d'Isa dans Exercices. Accueil aéré.
+   ===================================================================== */
+:root{--taupe:#7A625B;--taupe-l:#AD9B94;--filet:#EBDDD8;--filet-2:#D9C6BF}
+.card.white{border-color:var(--filet-2)}
+.nav button{color:#8C7169}
+.chip.ghost{color:var(--taupe)}
+.pot{background:var(--blush)}
+.pot.lock{border-color:var(--blush)}
+.nodes::before{border-left-color:#E7B7AD}
+.lvl,.chap{border-color:var(--filet-2)}
+.illus{width:80px;height:80px;flex:none;display:block;object-fit:contain;object-position:bottom;align-self:flex-end;margin-bottom:-11px}
+.card.peach .illus{margin-bottom:-22px}
+.card.peach .illus-row{align-items:flex-end}
+.illus-row{align-items:flex-end}
+/* rouille = information importante à valoriser (décision Isa, 21 sept.) */
+.hl{font-style:normal;color:var(--rouille);font-weight:600}
+.card .txt .t{margin-bottom:2px}
+
+/* v0.1.4 — jauge de niveau sans filets (décision Isa) */
+.lvl{border-top:0;border-bottom:0;padding:10px 0 2px}
+.lvl + .chapter > .chap, .lvl + p + .chapter > .chap{border-top:0}
+
+/* =====================================================================
+   v0.2.0 — jardin aménageable (référence claude/jardin-amenageable.md)
+   ===================================================================== */
+.jardin-card{padding:0;overflow:hidden;position:relative;border-radius:var(--r-l)}
+.jardin-apercu{position:relative;height:230px;overflow:hidden;background:#D8CDB8;cursor:pointer}
+.jardin-apercu .fond{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.jardin-apercu .el{position:absolute;pointer-events:none;transform-origin:50% 100%}
+.jardin-btn{position:absolute;right:14px;bottom:14px}
+.jardin-ecran{position:absolute;inset:0;background:#D8CDB8}
+.jardin-frame{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
